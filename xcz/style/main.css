@@ -1,0 +1,17 @@
+*{font-family:微软雅黑;outline:none;margin:0px;padding:0px;font-size:12px;color:#333; outline: 0; font-size: 12px; vertical-align: baseline; font-style: normal; }
+body,html{position:relative;height:100%;overflow:hidden;}
+div{position:relative;z-index:2;}
+img{vertical-align:middle;}
+ol, ul, li { list-style: none }
+table{table-layout: fixed;border-collapse:collapse;border-spacing:0;}
+td,th{white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+input[type="radio"],input[type="checkbox"]{vertical-align:sub;}
+textarea{resize:none;-webkit-box-sizing: border-box;outline: none;}
+button{border:none;}
+input[type="button"]{border:none;}
+.clearBoth{clear:both;height:15px;overflow:hidden;}
+
+iframe{border:none;}
+input,textarea,select{-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+
+.hr{clear:both;height:2px;background:#ddd;}

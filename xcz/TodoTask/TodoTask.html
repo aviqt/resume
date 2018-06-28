@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>TodoTask</title>
+<script src="jquery.min.js"></script>
+</head>
+<body>
+
+
+<div id="TodoTask_body">
+    <div id="TodoTask_title">江城社区污水处理整治工作</div>
+	
+	<div id="TodoTask_box1">
+		<div class="TodoTask_line">
+			<span>任务地址：</span>
+			<div><input type="text" disabled="disabled" value="宁波市鄞州区邱隘镇邱隘大街215号"></div>
+		</div>
+		<div class="TodoTask_line">
+			<span>发起时间：</span>
+			<div><input type="text" disabled="disabled" value="2017-03-16"></div>
+		</div>
+		<div class="TodoTask_line">
+			<span>考核任务：</span>
+			<div><input type="text" disabled="disabled" value="整治环境卫生"></div>
+		</div>
+		<div class="TodoTask_line">
+			<span>考核项目：</span>
+			<div><input type="text" disabled="disabled" value="地面保洁到位、垃圾收集、转运和处理过程中，消除"></div>
+		</div>
+		<div class="TodoTask_line">
+			<span>扣分选项：</span>
+			<div>
+				<select>
+					<option>-0.5</option>
+					<option>-1.0</option>
+					<option>-1.5</option>
+					<option>-2.0</option>
+				</select>
+			</div>
+		</div>
+		<div class="TodoTask_line">
+			<span>现场问题：</span>
+			<div><textarea></textarea></div>
+		</div>
+	</div>
+	<div id="TodoTask_box2">
+		<div class="TodoTask_line">
+			<span>任务流程：</span>
+			<div>
+				<div></div>
+			</div>
+		</div>
+		<div class="TodoTask_line">
+			<span>查看地图：</span>
+			<div>
+				<div></div>
+			</div>
+		</div>
+	</div>
+	<div id="TodoTask_box3">
+		<span>照片列表：</span>
+		<div id="TodoTask_photoBox">
+			<div id="TodoTask_photoMenu">
+				<a>上传图片</a>
+				<a>图片管理</a>
+			</div>
+			<div id="TodoTask_photoList">
+				<span class="TodoTask_prevPhoto"><</span>
+				<div>
+					<ul>
+						<li><img src="1.png"></li>
+						<li><img src="sagiri.png"></li>
+						<li><img src="1.png"></li>
+						<li><img src="sagiri.png"></li>
+						<li><img src="1.png"></li>
+						<li><img src="sagiri.png"></li>
+						<li><img src="1.png"></li>
+						<li><img src="sagiri.png"></li>
+						<li><img src="1.png"></li>
+						<li><img src="sagiri.png"></li>
+						
+					</ul>
+				</div>
+				<span class="TodoTask_nextPhoto">></span>
+			</div>
+		</div>
+	</div>
+	<div id="TodoTask_Btns">
+		<input type="button" value="提交申请">
+		<input type="button" value="取　消">
+	</div>
+</div>
+<script>
+
+
+$(function(){
+	var todoTaskPhotoListBox=$("#TodoTask_photoList div ul");
+	var todoTaskPhotoIndex = 0;
+	var todoTaskPhotoListBoxLeft = 0;
+	var todoTaskPhotoMoveIng = true;
+	var todoTaskPhotoListBoxHtml = todoTaskPhotoListBox.html();
+	
+	$(window).resize(function () {
+		todoTaskPhotoListBoxAnimate(0);
+		todoTaskPhotoListBoxCheck();
+	})
+	function todoTaskPhotoListBoxCheck(){
+		todoTaskPhotoMoveIng = true;
+		todoTaskPhotoListBox.html(todoTaskPhotoListBoxHtml);
+		for(var i=0;i<todoTaskPhotoListBox.find("li").length;i++){
+			todoTaskPhotoListBoxLeft += todoTaskPhotoListBox.find("li:eq(" + i + ")").width()+10;
+		}
+		if(todoTaskPhotoListBoxLeft > todoTaskPhotoListBox.parent().width()){
+			todoTaskPhotoMoveIng = false;
+			todoTaskPhotoListBoxLeft = 0;
+			todoTaskPhotoListBox.html(todoTaskPhotoListBoxHtml+todoTaskPhotoListBoxHtml);
+		}
+	}
+	todoTaskPhotoListBoxCheck();
+	
+	$(".TodoTask_nextPhoto").click(function(){
+		if(todoTaskPhotoMoveIng)return;
+		todoTaskPhotoMoveIng = true;
+		todoTaskPhotoListBoxAnimate(todoTaskPhotoIndex + 1);
+	})
+	$(".TodoTask_prevPhoto").click(function(){
+		if(todoTaskPhotoMoveIng)return;
+		todoTaskPhotoMoveIng = true;
+		todoTaskPhotoListBoxAnimate(todoTaskPhotoIndex - 1);
+	})
+	function todoTaskPhotoListBoxAnimate(index){
+		var todoTaskPhotoCount = todoTaskPhotoListBox.find("li").length/2;
+		var toLeft = false;
+		if(index == -1){
+			todoTaskPhotoIndex = todoTaskPhotoCount;
+			todoTaskPhotoListBoxLeft = 0;
+			for(var i=0;i<todoTaskPhotoIndex;i++){
+				todoTaskPhotoListBoxLeft += todoTaskPhotoListBox.find("li:eq(" + i + ")").width()+10;
+			}
+			todoTaskPhotoListBox.css({"left":-todoTaskPhotoListBoxLeft+"px"});
+			index = todoTaskPhotoCount-1;
+		}
+		if(index == todoTaskPhotoCount){
+			toLeft =true;
+		}
+		todoTaskPhotoIndex = index;
+		todoTaskPhotoListBoxLeft = 0;
+		for(var i=0;i<todoTaskPhotoIndex;i++){
+			todoTaskPhotoListBoxLeft += todoTaskPhotoListBox.find("li:eq(" + i + ")").width()+10;
+		}
+		todoTaskPhotoListBox.animate({"left":-todoTaskPhotoListBoxLeft+"px"},500,function(){
+			todoTaskPhotoMoveIng = false;
+			if(toLeft){
+				todoTaskPhotoListBoxLeft = 0;
+				todoTaskPhotoIndex = 0;
+				todoTaskPhotoListBox.css({"left":-todoTaskPhotoListBoxLeft+"px"});
+			}
+		})
+	}
+})
+</script>
+<style>
+*{-webkit-box-sizing: border-box;outline:none;}
+ol, ul, li { list-style: none;margin:0px; padding:0px;}
+#TodoTask_body{background:white;position:absolute;top:20px;right:40px;bottom:20px;left:40px;font-size:12px;}
+#TodoTask_title{font-weight:bold;color:#033687;font-size:14px;line-height:35px;}
+
+
+#TodoTask_body .TodoTask_line{position:relative;margin-bottom:10px;}
+#TodoTask_body .TodoTask_line > span{display:block;line-height:28px;height:30px;width:60px;text-align:right;float:left;}
+#TodoTask_body .TodoTask_line > div{overflow:hidden;position:relative;}
+#TodoTask_body .TodoTask_line > div input[type='text']{color:gray;text-indent: 5px;padding:0px;height:28px;width:100%;border:1px solid #ddd;border-radius:3px;}
+#TodoTask_body .TodoTask_line > div textarea{color:gray;text-indent: 5px;padding:0px;line-height:22px;width:100%;border:1px solid #ddd;border-radius:3px;resize:none;height:176px}
+#TodoTask_body .TodoTask_line > div > div{color:gray;padding:0px;line-height:22px;width:99%;border:1px solid #ddd;border-radius:3px;height:178px}
+#TodoTask_body .TodoTask_line > div select{color:gray;height:28px;text-indent: 5px;width:100%;border:1px solid #ddd;border-radius:3px;}
+
+#TodoTask_box1{float:left;height:400px;width:48%;background:;}
+#TodoTask_box2{float:right;height:400px;width:48%;background:;}
+#TodoTask_box3{height:220px;clear:both;background:;}
+#TodoTask_box3 > span{line-height:30px;}
+#TodoTask_photoBox {border:1px solid #ddd;height:180px;}
+#TodoTask_photoMenu{margin:15px 15px 10px 15px;overflow:hidden;}
+#TodoTask_photoMenu a{width:100px;line-height:25px;float:left;text-align:center;border:1px solid #ddd;cursor:pointer;}
+#TodoTask_photoMenu a:hover{color:orange;}
+#TodoTask_photoList{position:relative;height:110px;margin:0 15px;}
+#TodoTask_photoList span{color:gray;font-size:20px;height:110px;position:absolute;top:0px;cursor:pointer;display:block;line-height:110px;text-align:center;width:20px;background:#f5f5f5;}
+#TodoTask_photoList span:hover{background:#eee;}
+#TodoTask_photoList .TodoTask_prevPhoto{left:0px;}
+#TodoTask_photoList .TodoTask_nextPhoto{right:0px;}
+
+#TodoTask_photoList div{position:absolute;left:28px;right:28px;top:0px;bottom:0px;overflow:hidden;}
+#TodoTask_photoList ul{width:10000px;overflow:hidden;height:100%;position:absolute;left:0px;top:0px;}
+#TodoTask_photoList li{float:left;overflow:hidden;margin-right:10px;border-radius:3px;}
+#TodoTask_photoList li img{height:108px;border:1px solid #6d6f6a;}
+
+
+#TodoTask_Btns{text-align:center;margin:5px 0;}
+#TodoTask_Btns input[type='button']{border:none;width:70px;height:30px;background:#a4d200;color:white;cursor:pointer;}
+#TodoTask_Btns input[type='button']:hover{background:#92bd01;}
+#TodoTask_Btns input[type='button']:nth-of-type(2){background:#00b7d1;}
+#TodoTask_Btns input[type='button']:hover:nth-of-type(2){background:#01a2b9;}
+	
+</style>
+</body>
+</html>

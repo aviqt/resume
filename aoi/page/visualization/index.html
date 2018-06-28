@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>	
+	<meta charset="utf-8"> 
+	<title>Visualization</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+	<script src="Scripts/jquery-1.7.1.min.js"></script> 
+	<script src="Scripts/echarts.min.js"></script>
+	<link href="Style/cover.css" rel="stylesheet">  
+
+</head>
+<body>
+<div id="box" style="position:relative;height:1060px;width:2500px;overflow:hidden;left:0px;top:0px;">
+	<div id="example" style="position:absolute;height:1060px;width:2500px;left:0;top:0px;background:rgba(111,20,255,0.0);">
+		<div  class="example-title" style="text-align:center;" ><img src="img/title.png"></div>
+	</div>
+	<div id="example2" style="position:absolute;height:1060px;width:2500px;left:2500px;top:0px;background:rgba(11,111,255,0.0);">
+		<div class="example-title" style="text-align:center;" ><img src="img/title.png"></div>
+	</div>
+</div>
+<script src="js/ningmap.js"></script>
+<script src="js/page.js"></script>
+<script>
+
+
+$(window).load(function(){
+	fillExample($("#example"));
+	setBodySize();
+});
+$(window).resize(function(){
+	setBodySize();
+});
+
+
+//拖动切换
+var downX = 0;
+var ifFirstScreen = true;
+var exampleTitle = '<div style="text-align:center;" ><img src="img/title.png"></div>';
+$("#box").mousedown(function(e){
+	downX = e.clientX;
+	return false;
+})
+$("#box").mouseup(function(e){
+	var distance = e.clientX - downX;
+	if(Math.abs(distance) < 200) return;
+	var obj1 = ifFirstScreen ? $("#example"):$("#example2");
+	var obj2 = ifFirstScreen ? $("#example2"):$("#example");
+	var left1 = distance < 0 ? "100%" : "-100%";
+	var left2 = distance < 0 ? "-100%" : "100%";
+	obj2.css({left:left1});
+	obj1.animate({left:left2},function(){
+		obj1.html(exampleTitle);
+	});
+	obj2.animate({left:0},function(){
+		fillExample(obj2);
+	});
+	ifFirstScreen = !ifFirstScreen;
+	
+	
+	return false;
+})
+</script>
+</body>
+</html>

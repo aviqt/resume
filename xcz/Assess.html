@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<title>日常监管</title>
+	<link href="style/main.css" rel="stylesheet" />
+	<link href="style/iframePage.css" rel="stylesheet" />
+	<script src="script/jquery.min.js"></script>
+	<script src="script/main.js"></script>
+	<script src="script/iframePage.js"></script>
+</head>
+<body>
+
+<div class="body">
+    <div class="box">
+        <div class="box_head tab_head">
+            <div>完成情况</div>
+            <div>考核明细</div>
+            <span class="toBig">放大</span>
+        </div>
+
+        <div class="box_body tab_body">
+            <div class="hideScrollY">
+                <div class="assessCompletion" id="assessCompletion">
+                    <div id="assessCompletion_f"></div>
+                    <div class="hr" style="margin:20px 0 10px 0;"></div>
+                    <div id="assessCompletion_a"></div>
+
+                    <div class="bigBtns">
+                        <a class="btn_green">查看已完成项目</a>
+                        <a class="btn_orange">查看未完成项目</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box_body tab_body">
+			<div class="search_head">
+				<div>任务名称：<input type="text" style="width:250px">   </div>        
+				<div>所在区域：<select></select>                         </div>
+				<div>所在街道：<select></select><br>                     </div>
+				<div>开始日期：<input type="text">                       </div>
+				<div>计划完成日期：<input type="text">                   </div>
+				<div>任务类型：<select></select>                         </div>
+				<div>任务状态：<select></select>                         </div>
+				<div><input type="button" value="查询">                  </div>
+			</div>
+            <div class="hideScrollY">
+                <div class="tableView" id="xmglList"></div>
+                <div class="pageView" id="xmglListPage"></div>
+                <div class="clearBoth"></div>
+            </div>
+        </div>
+    </div>
+ </div>
+
+<script>
+    var projectItems = [
+        { name: "前置条件：", total: 5, completed: 3 },
+        { name: "加强规划引领：", total: 10, completed: 8 },
+        { name: "整治环境卫生：", total: 9, completed: 5 },
+        { name: "整治城镇秩序：", total: 6, completed: 3 },
+        { name: "整治乡容乡貌：", total: 6, completed: 5 },
+        { name: "加分项：", total: 5, completed: 2 },
+    ];
+    
+    
+    $(function () {
+        getXmglList(1);
+        getAssessCompletion(projectItems);
+    })
+
+    function getAssessCompletion(projectItems) {
+        var total_a = 0,
+            completed_a = 0;
+
+
+        var columns_f = [
+              { attr: "width='160' style='text-align:left;'", name: "c1", html: "分项完成进度" },
+              { attr: "width=''", name: "c2", html: "" },
+              { attr: "width='12%'", name: "c3", html: "完成进度" },
+              { attr: "width='12%'", name: "c4", html: "项目进度" },
+        ];
+        var tableData_f = [];
+        for (var i = 0; i < projectItems.length; i++) {
+            var plist = [],
+                Completion = parseInt(projectItems[i].completed * 100 / projectItems[i].total) + "%";
+
+            total_a += projectItems[i].total;
+            completed_a += projectItems[i].completed;
+
+            plist.c1 = "<span>" + projectItems[i].name + "</span>";
+            plist.c2 = "<div class='progressBar' alt='" + Completion + "'></div>";
+            plist.c3 = Completion;
+            plist.c4 = projectItems[i].completed + "/" + projectItems[i].total;
+            plist.attr = "";
+            tableData_f.push(plist);
+        }
+        var obj_f = $("#assessCompletion_f");
+        showTable(columns_f, tableData_f, obj_f);
+
+
+        var columns_a = [
+              { attr: "width='160' style='text-align:left;'", name: "c1", html: "总体完成进度" },
+              { attr: "width=''", name: "c2", html: "" },
+              { attr: "width='12%'", name: "c3", html: "" },
+              { attr: "width='12%'", name: "c4", html: "" },
+        ];
+        var tableData_a = [];
+        var plist_a = [];
+        Completion_a = parseInt(completed_a * 100 / total_a) + "%";
+        plist_a.c1 = "<span>总体进度</span>";
+        plist_a.c2 = "<div class='progressBar progressBar_red' alt='" + Completion_a + "'></div>";
+        plist_a.c3 = Completion_a;
+        plist_a.c4 = completed_a + "/" + total_a;
+        plist_a.attr = "";
+        tableData_a.push(plist_a);
+        var obj_a = $("#assessCompletion_a");
+        showTable(columns_a, tableData_a, obj_a);
+
+
+
+        var speed = 500;
+        $(".progressBar").each(function () {
+            $(this).html("<div style='width:0%;'></div>");
+            $(this).find("div").animate({ "width": $(this).attr("alt") }, speed);
+            speed += 30;
+        })
+    }
+    
+    
+    
+    
+    /*项目列表获取*/
+    function getXmglList(pageIndex) {
+        var columns = [
+            { attr: "", name: "c1", html: "项目名称" },
+            { attr: "width='100'", name: "c2", html: "所在区域" },
+            { attr: "width='130'", name: "c3", html: "所在街道" },
+            { attr: "width='130'", name: "c4", html: "项目类型" },
+            { attr: "width='100'", name: "c5", html: "开始日期" },
+            { attr: "width='100'", name: "c6", html: "计划完成日期" },
+            { attr: "width='100'", name: "c7", html: "状态" },
+            { attr: "width='130'", name: "c8", html: "总体进度" },
+        ];
+        var tableData = [
+            { c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_f'>未开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectDetail()'" },
+            { c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_t'>已开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectDetail()'" },
+            { c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_t'>已开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectDetail()'" },
+            { c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_f'>未开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectDetail()'" },
+            { c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_f'>未开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectDetail()'" },
+            { c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_f'>未开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectDetail()'" },
+            { c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_t'>已开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectDetail()'" },
+            { c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_f'>未开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectDetail()'" },
+        ];
+        var obj = $("#xmglList");
+        showTable(columns, tableData, obj);
+
+        var pageRow = 10;
+        var count = 951;
+        var fn = arguments.callee;
+        var pageObj = $("#xmglListPage");
+        setPage(pageIndex, pageRow, count, fn,  pageObj);
+    }
+    
+    
+    
+    
+    
+</script>
+
+	
+
+
+</body>
+</html>

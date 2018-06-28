@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<title>专题数据</title>
+	<link href="style/main.css" rel="stylesheet" />
+	<link href="style/iframePage.css" rel="stylesheet" />
+	<script src="script/jquery.min.js"></script>
+	<script src="script/main.js"></script>
+	<script src="script/iframePage.js"></script>
+</head>
+<body>
+<div class="body">
+    <div class="box">
+        <div class="box_head tab_head">
+            <div>图层</div>
+            <div>专题列表</div>
+			<span class="toBig">放大</span>
+        </div>
+        <div class="box_body tab_body">
+            <div class="map"></div>
+            <div class="mapTypeBtns">
+                <div class="active"><span>地图</span></div>
+                <div><span>影像</span></div>
+                <div><span>三维</span></div>
+                <div><span>全景</span></div>
+            </div>
+        </div>
+        <div class="box_body tab_body">
+			<div class="search_head">
+				<div>任务名称：<input type="text" style="width:250px">   </div>        
+				<div>所在区域：<select></select>                         </div>
+				<div>所在街道：<select></select><br>                     </div>
+				<div>开始日期：<input type="text">                       </div>
+				<div>计划完成日期：<input type="text">                   </div>
+				<div>任务类型：<select></select>                         </div>
+				<div>任务状态：<select></select>                         </div>
+				<div><input type="button" value="查询">                  </div>
+			</div>
+            <div class="hideScrollY">
+                <div class="tableView" id="ztsjList"></div>
+                <div class="pageView" id="ztsjListPage"></div>
+                <div class="clearBoth"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+        $(".mapTypeBtns div").click(function(){
+            $(this).siblings().removeClass("active");
+            $(this).addClass("active");
+        })
+		
+		getZtsjList(1)
+    })
+	
+	
+    /*列表获取*/
+    function getZtsjList(pageIndex) {
+        var columns = [
+            { attr: "width='40'", name: "cb", html: "<input type='checkbox'>" },
+            { attr: "", name: "c1", html: "项目名称" },
+            { attr: "width='100'", name: "c2", html: "所在区域" },
+            { attr: "width='130'", name: "c3", html: "所在街道" },
+            { attr: "width='130'", name: "c4", html: "项目类型" },
+            { attr: "width='100'", name: "c5", html: "开始日期" },
+            { attr: "width='100'", name: "c6", html: "计划完成日期" },
+            { attr: "width='100'", name: "c7", html: "状态" },
+            { attr: "width='130'", name: "c8", html: "总体进度" },
+        ];
+        var tableData = [
+            { cb: "<input type='checkbox'>", c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_f'>未开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectEdit()'" },
+            { cb: "<input type='checkbox'>", c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_f'>未开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectEdit()'" },
+            { cb: "<input type='checkbox'>", c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_f'>未开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectEdit()'" },
+            { cb: "<input type='checkbox'>", c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_f'>未开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectEdit()'" },
+            { cb: "<input type='checkbox'>", c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_f'>未开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectEdit()'" },
+            { cb: "<input type='checkbox'>", c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_f'>未开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectEdit()'" },
+            { cb: "<input type='checkbox'>", c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_f'>未开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectEdit()'" },
+            { cb: "<input type='checkbox'>", c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_f'>未开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectEdit()'" },
+        ];
+        var obj = $("#ztsjList");
+        showTable(columns, tableData, obj);
+
+        var pageRow = 10;
+        var count = 951;
+        var fn = arguments.callee;
+        var pageObj = $("#ztsjListPage");
+        setPage(pageIndex, pageRow, count,fn,  pageObj);
+    }
+	
+	
+</script>
+</body>
+</html>

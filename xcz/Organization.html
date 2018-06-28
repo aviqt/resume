@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<title>项目管理</title>
+	<link href="style/main.css" rel="stylesheet" />
+	<link href="style/iframePage.css" rel="stylesheet" />
+	<script src="script/jquery.min.js"></script>
+	<script src="script/main.js"></script>
+	<script src="script/iframePage.js"></script>
+</head>
+<body>
+    <div class="body">
+        <div class="box">
+            <div class="box_head tab_head">
+                <div id="areaname"></div>
+                <span class="toBig">放大</span>
+            </div>
+            <div class="box_body tab_body"> 
+                <div class="hideScrollY">
+                    <div id="yzyd_body">
+                        <div class="float_box">
+                            <div class="title">
+                                <div class="point"></div>
+                                <span>乡镇概览</span>
+                            </div>
+                            <div class="text" id="oz_overview">
+                                <span></span>
+                                <textarea></textarea>
+                            </div>
+                            <div class="operation">
+                                <a id="save_oz_overview" style="display:none;">保存</a>
+                                <a id="edit_oz_overview">编辑</a>
+                            </div>
+                            <div class="information">
+                                <div class="infor_item">
+                                    <div class="infor_l">机构名称：</div>
+                                    <div class="infor_r" id="oz_name"></div>
+                                </div>
+                                <div class="infor_item">
+                                    <div class="infor_l">联系电话：</div>
+                                    <div class="infor_r" id="oz_telephone"></div>
+                                </div>
+                                <div class="infor_item">
+                                    <div class="infor_l">联系邮箱：</div>
+                                    <div class="infor_r" id="oz_email"></div>
+                                </div>
+                                <div class="infor_item">
+                                    <div class="infor_l">联系地址：</div>
+                                    <div class="infor_r" id="oz_address"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="float_box"></div>
+                        <div class="float_box">
+                            <div class="title">
+                                <div class="point"></div>
+                                <span>地图信息</span>
+                            </div>
+                            <div class="map" id="oz_map"></div>
+                        </div>
+                        <div class="float_box">
+                            <div class="title">
+                                <div class="point"></div>
+                                <span>基本信息</span>
+                            </div>
+                            <div class="tab_menu">
+                                <div class="active">项目列表</div>
+                                <div>组织机构</div>
+                                <div>规划信息</div>
+                                <div>整治情况</div>
+                                <div>无人机航拍</div>
+                            </div>
+                            <div class="tab_menu_p tmp1">
+                                <div>领导介绍</div>
+                                <div>机构人员</div>
+                                <div>义务监管员</div>
+                                <a>添加</a>
+                            </div>
+                            <div class="tab_menu_p tmp2">
+                                <a>添加</a>
+                            </div>
+                            <div class="tab_menu_p tmp3">
+                                <a>添加</a>
+                            </div>
+							<div class="clearBoth"></div>
+							
+							<div class="listBox">
+								<div class="tableView" id="yzydList"></div>
+								<div class="memberCardView" id="ldjsList"></div>
+								<div class="videoListView" id="wrjhpList"></div>
+							</div>
+							<div class="pageView" id="yzydListPage"></div>
+							<div class="clearBoth"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $("#areaname").html("海曙区-集士港");
+            $("#oz_overview span").html("为推进落实“十三五”规划和高水平全面建成小康社会，积极组织开展宁波市小城镇环境综合整治行动，建立党委政府主抓、住建部门牵头、相关部门参与的工作推进机制。市委、市政府成立全市小城镇环境综合整治行动（美丽集镇建设）领导小组，由市委副书记任组长，领导小组办公室设在市住建委，各相关部门抽调人员到领导小组办公室集中办公。领导小组负责统筹全市小城镇环境综合整治工作，制定工作计划，听取综合整治规划方案，协调解决重大问题，尽快召开动员会，完善联动机制，形成工作合力，根据实际统筹编制本地区整治行动方案和年度计划，以钉钉子精神扎实推进各项整治工作。")
+            $("#oz_name").html("宁波市小城镇综合整治行动（美丽集镇建设）领导小组");
+            $("#oz_telephone").html("0574-88888888");
+            $("#oz_email").html("webmaster@nbjs.gov.cn");
+            $("#oz_address").html("宁波市江东区松下街595号");
+            
+			
+			
+            /*基本信息列表切换*/
+            $(".tab_menu div").click(function () {
+                $(this).siblings().removeClass("active");
+                $(this).addClass("active");
+                var index = $(this).index();
+                $(".tab_menu_p").hide();
+                $(".tmp" + index).show();
+                $(".tab_menu_p div").removeClass("active");
+				
+				
+				$(".listBox div").html("");
+				if(index == 1){
+					$(".tmp" + index + " div:eq(0)").click();
+					return;
+				}
+				if(index == 4){
+					getWrjhpList(1);
+					return;
+				}
+				getYzydList(1);
+            })
+
+            $(".tab_menu_p div").click(function () {
+                $(this).siblings().removeClass("active");
+                $(this).addClass("active");
+                var index = $(this).index();
+				
+				
+				
+				$(".listBox div").html("");
+				if(index == 0){
+					getYzydLdjsList(1);
+					return;
+				}
+				getYzydList(1);
+            })
+			
+            $(".tab_menu div:eq(1)").click();
+            /*乡镇概览编辑*/
+            $("#edit_oz_overview").click(function () {
+                $("#oz_overview").addClass("text_edit");
+                $("#oz_overview textarea").val($("#oz_overview span").html()).focus();
+                $(this).hide();
+                $("#save_oz_overview").show();
+            })
+            $("#save_oz_overview").click(function () {
+                $("#oz_overview").removeClass("text_edit");
+                $("#oz_overview span").html($("#oz_overview textarea").val());
+                $(this).hide();
+                $("#edit_oz_overview").show();
+                alert("保存成功");
+            })
+        })
+		
+		
+		
+		
+		/*一镇一档列表获取*/
+		function getYzydList(pageIndex) {
+			var columns = [
+				{ attr: "", name: "c1", html: "任务名称" },
+				{ attr: "", name: "c2", html: "所属区域" },
+				{ attr: "", name: "c3", html: "开始日期" },
+				{ attr: "", name: "c4", html: "计划完成日期" },
+				{ attr: "", name: "c5", html: "状态" },
+				{ attr: "", name: "c6", html: "总体进度" },
+			];
+			var tableData = [
+				{ c1: "<span title='沧海路扩展改革项目'>沧海路扩展改革项目<span>", c2: "江东区", c3: "2017-03-15", c4: "2017-06-15", c5: "未开始", c6: "项目实施", attr: "" },
+				{ c1: "<span title='沧海路扩展改革项目'>沧海路扩展改革项目<span>", c2: "江东区", c3: "2017-03-15", c4: "2017-06-15", c5: "未开始", c6: "项目实施", attr: "" },
+				{ c1: "<span title='沧海路扩展改革项目'>沧海路扩展改革项目<span>", c2: "江东区", c3: "2017-03-15", c4: "2017-06-15", c5: "未开始", c6: "项目实施", attr: "" },
+				{ c1: "<span title='沧海路扩展改革项目'>沧海路扩展改革项目<span>", c2: "江东区", c3: "2017-03-15", c4: "2017-06-15", c5: "未开始", c6: "项目实施", attr: "" },
+				{ c1: "<span title='沧海路扩展改革项目'>沧海路扩展改革项目<span>", c2: "江东区", c3: "2017-03-15", c4: "2017-06-15", c5: "未开始", c6: "项目实施", attr: "" },
+				{ c1: "<span title='沧海路扩展改革项目'>沧海路扩展改革项目<span>", c2: "江东区", c3: "2017-03-15", c4: "2017-06-15", c5: "未开始", c6: "项目实施", attr: "" },
+				{ c1: "<span title='沧海路扩展改革项目'>沧海路扩展改革项目<span>", c2: "江东区", c3: "2017-03-15", c4: "2017-06-15", c5: "未开始", c6: "项目实施", attr: "" },
+				{ c1: "<span title='沧海路扩展改革项目'>沧海路扩展改革项目<span>", c2: "江东区", c3: "2017-03-15", c4: "2017-06-15", c5: "未开始", c6: "项目实施", attr: "" },
+			];
+			var obj = $("#yzydList");
+			showTable(columns, tableData, obj);
+
+			var pageRow = 10;
+			var count = 951;
+			var fn = arguments.callee;
+			var pageObj = $("#yzydListPage");
+			setPage(pageIndex, pageRow, count,fn,pageObj);
+			
+			
+		}
+		
+
+
+		/*一镇一档领导介绍列表获取*/
+		function getYzydLdjsList(pageIndex) {
+			var cardData = [
+				{name:"纱雾1", photo:"images/plus/sagiri.png", post:"主任、党委书记", introduce:"主持党委和住房城乡建委的全面工作。", telephone:"0574-87191008", resume:"1958年9出生，1981年12月加入中国共产党，汉族，浙江宁波人，大学本科学历。历任镇海区机关事务管理局局长，镇海区财政局（地方税务局）局长、党组书记、区长助理，副区长、宁波高发展和改革委员会副主任、党工委委员（正局长级）、宁波市轨道交通工程建设指挥部总指挥、党委书记、宁波市机场拆迁工程指挥部总指挥、党委书记。"},
+				{name:"纱雾2", photo:"images/plus/sagiri.png", post:"主任、党委书记", introduce:"主持党委和住房城乡建委的全面工作。", telephone:"0574-87191008", resume:"1958年9出生，1981年12月加入中国共产党，汉族，浙江宁波人，大学本科学历。历任镇海区机关事务管理局局长，镇海区财政局（地方税务局）局长、党组书记、区长助理，副区长、宁波高发展和改革委员会副主任、党工委委员（正局长级）、宁波市轨道交通工程建设指挥部总指挥、党委书记、宁波市机场拆迁工程指挥部总指挥、党委书记。"},
+				{name:"纱雾3", photo:"images/plus/sagiri.png", post:"主任、党委书记", introduce:"主持党委和住房城乡建委的全面工作。", telephone:"0574-87191008", resume:"1958年9出生，1981年12月加入中国共产党，汉族，浙江宁波人，大学本科学历。历任镇海区机关事务管理局局长，镇海区财政局（地方税务局）局长、党组书记、区长助理，副区长、宁波高发展和改革委员会副主任、党工委委员（正局长级）、宁波市轨道交通工程建设指挥部总指挥、党委书记、宁波市机场拆迁工程指挥部总指挥、党委书记。"},
+				{name:"纱雾4", photo:"images/plus/sagiri.png", post:"主任、党委书记", introduce:"主持党委和住房城乡建委的全面工作。", telephone:"0574-87191008", resume:"1958年9出生，1981年12月加入中国共产党，汉族，浙江宁波人，大学本科学历。历任镇海区机关事务管理局局长，镇海区财政局（地方税务局）局长、党组书记、区长助理，副区长、宁波高发展和改革委员会副主任、党工委委员（正局长级）、宁波市轨道交通工程建设指挥部总指挥、党委书记、宁波市机场拆迁工程指挥部总指挥、党委书记。"},
+				{name:"纱雾5", photo:"images/plus/sagiri.png", post:"主任、党委书记", introduce:"主持党委和住房城乡建委的全面工作。", telephone:"0574-87191008", resume:"1958年9出生，1981年12月加入中国共产党，汉族，浙江宁波人，大学本科学历。历任镇海区机关事务管理局局长，镇海区财政局（地方税务局）局长、党组书记、区长助理，副区长、宁波高发展和改革委员会副主任、党工委委员（正局长级）、宁波市轨道交通工程建设指挥部总指挥、党委书记、宁波市机场拆迁工程指挥部总指挥、党委书记。"},
+				{name:"纱雾6", photo:"images/plus/sagiri.png", post:"主任、党委书记", introduce:"主持党委和住房城乡建委的全面工作。", telephone:"0574-87191008", resume:"1958年9出生，1981年12月加入中国共产党，汉族，浙江宁波人，大学本科学历。历任镇海区机关事务管理局局长，镇海区财政局（地方税务局）局长、党组书记、区长助理，副区长、宁波高发展和改革委员会副主任、党工委委员（正局长级）、宁波市轨道交通工程建设指挥部总指挥、党委书记、宁波市机场拆迁工程指挥部总指挥、党委书记。"},
+			];
+			var cardListHtml = "";
+			for(var i = 0 ; i < cardData.length ; i++){
+				cardListHtml += '<div class="memberCard">\
+									<div class="photo"><img src="' + cardData[i].photo + '"></div>\
+									<div class="information">\
+										<div class="infor_item">\
+											<div class="infor_l">姓名</div>\
+											<div class="infor_r">' + cardData[i].name + '</div>\
+										</div>\
+										<div class="infor_item">\
+											<div class="infor_l">职务</div>\
+											<div class="infor_r">' + cardData[i].post + '</div>\
+										</div>\
+										<div class="infor_item">\
+											<div class="infor_l">介绍</div>\
+											<div class="infor_r">' + cardData[i].introduce + '</div>\
+										</div>\
+										<div class="infor_item">\
+											<div class="infor_l">电话</div>\
+											<div class="infor_r">' + cardData[i].telephone + '</div>\
+										</div>\
+										<div class="infor_item">\
+											<div class="infor_l">简历</div>\
+											<div class="infor_r">' + cardData[i].resume + '</div>\
+										</div>\
+									</div>\
+								</div>';
+			}
+			$("#ldjsList").html(cardListHtml);
+			
+			var pageRow = 6;
+			var count = 80;
+			var fn = arguments.callee;
+			var pageObj = $("#yzydListPage");
+			setPage(pageIndex, pageRow, count,fn, pageObj);
+			
+			
+		}
+		
+		/*一镇一档无人机航拍列表获取*/
+		function getWrjhpList(pageIndex){
+			var wrjhpData = [
+				{name:"纱雾",pic:"images/plus/wrjhp.jpg"},
+				{name:"纱雾",pic:"images/plus/wrjhp.jpg"},
+				{name:"纱雾",pic:"images/plus/wrjhp.jpg"},
+				{name:"纱雾",pic:"images/plus/wrjhp.jpg"},
+				{name:"纱雾",pic:"images/plus/wrjhp.jpg"},
+				{name:"纱雾",pic:"images/plus/wrjhp.jpg"},
+				{name:"纱雾",pic:"images/plus/wrjhp.jpg"},
+				{name:"纱雾",pic:"images/plus/wrjhp.jpg"},
+			];
+			var wrjhpListHtml = "";
+			for(var i = 0 ; i < wrjhpData.length ; i++){
+				wrjhpListHtml += '<img src="' + wrjhpData[i].pic + '">';
+			}
+			$("#wrjhpList").html(wrjhpListHtml);
+			
+			var pageRow = 6;
+			var count = 50;
+			var fn = arguments.callee;
+			var pageObj = $("#yzydListPage");
+			setPage(pageIndex, pageRow, count,fn, pageObj);
+		}
+    </script>
+</script>
+</body>
+</html>

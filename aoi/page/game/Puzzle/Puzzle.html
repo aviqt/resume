@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>拼图</title>
+
+<style type="text/css">
+.box {position:relative;margin:20px;background:#ccc}
+.frag{position:absolute;border:#aaa 0px solid;z-index:0; }
+
+.c{line-height:25px;font-size:12px;}
+.c input{border:none;border-bottom:1px solid #ddd;width:40px;padding-left:5px;}
+.c a{color:#333;text-decoration: none;}
+input:focus{outline:none;}
+
+</style>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var frags="";
+	var n=2,m=2;
+	var bw=640,bh=360;
+	var w,h;
+	var t=500;
+	var oB=false;
+	var img="1.jpg";
+	var zi;
+	function setBox(){
+		zi=0;
+		bw=$(".imgSize").width();
+		bh=$(".imgSize").height();
+		w=bw/n;
+		h=bh/m;
+		var imgLeft=parseInt(bw)+20;
+		$(".box").css({width:bw+"px",height:bh+"px"});
+		frags="<img src='"+img+"' style='width:160px;position:absolute;left:"+imgLeft+"px;'>";
+		for(var i=0;i<n;i++){
+			for(var j=0;j<m;j++){
+				var left=i*w;
+				var top=j*h;
+				frags+="<div class='frag "+i+j+"' style='width:"+w+"px;height:"+h+"px;left:"+left+"px;top:"+top+"px;background:url("+img+") "+(bw-left)+"px "+(bh-top)+"px; '></div>";
+			}
+		}
+		$(".box").html(frags);
+		
+		var oBoolean=false;
+		var xp,yp,xx,yy;
+		var obj;
+		
+		$(".frag").mousedown(function(e){
+			obj=$(this);
+			xp=e.clientX-obj.offset().left;
+			yp=e.clientY-obj.offset().top;
+			if(oB){
+				oBoolean=true;
+				obj.css({"z-index":zi++,"opacity":0.5});
+			}
+			return false;
+		})
+		$("body").mouseup(function(e){
+			var l=obj.offset().left-$(".box").offset().left;
+			var top=obj.offset().top-$(".box").offset().top;
+			if(oBoolean){
+				if(l>-w/2 && top>-h/2 && l<(bw-w/2) && top<(bh-h/2)){
+					l=Math.ceil((l-w/2)/w)*w;
+					top=Math.ceil((top-h/2)/h)*h;
+				}
+				obj.css({"left":l,"top":top,"opacity":1});
+				oBoolean=false;
+			}
+			return false;
+		})
+		$("body").mousemove(function(e){
+			xx = e.clientX-$(".box").offset().left;
+			yy = e.clientY-$(".box").offset().top; 
+			if(oBoolean){
+				obj.css("left",xx-xp);
+				obj.css("top",yy-yp);
+			}
+			return false;
+		})
+	
+		$(".box img").dblclick(function(){
+			img=$(this).attr("src");
+			setBox();
+			return false;
+		})
+		oB=false;
+	}
+	
+	function resetBox(){
+		if(oB){
+			for(var i=0;i<n;i++){
+				for(var j=0;j<m;j++){
+					var x=i*w;
+					var y=j*h;
+					var a=j+m*i;
+					$(".frag:eq("+a+")").animate({left:x,top:y},t);
+				}
+			}
+			oB=false;
+		}
+		return false;
+	}
+	
+	function breakBox(){
+		if(oB==false){
+			$(".frag").each(function(){
+				var l=$(this).position().left;
+				var top=$(this).position().top;
+				var x=Math.ceil(Math.random()*(bw-w))+bw;
+				var y=Math.ceil(Math.random()*(bh-h));
+				var tt=Math.ceil(Math.random()*t); 
+				$(this).animate({left:x,top:y},t/*,function(){$(this).animate({top:500},tt);}*/);	
+			})
+			oB=true;
+			st=settimei
+		}
+		return false;
+	}
+	
+	$(".ok").click(function(){
+		n=$(".n").val();
+		m=$(".m").val();
+		img=$(".i").val();
+	    $(".box").html("<img src='"+img+"' class='imgSize' style='display:none'>");
+		setTimeout(setBox, 150);
+		return false;
+	})
+	
+	
+	$(".box").dblclick(function(){
+		breakBox();
+		return false;
+	});
+	
+	$(".reset").click(function(){
+		resetBox();
+		return false;
+	});
+	
+	$(".start").click(function(){
+		breakBox();
+		return false;
+	});
+	var time=0;
+	var st;
+	function setTime(){
+	    $(".time").html(time);
+	    time++;
+	}
+	
+	
+});
+</script>
+</head>
+<body>
+<div class="c">
+行:<input type="text" class="m" value="2">
+列:<input type="text" class="n" value="2"><br>
+图:<input type="text" class="i" placeholder="请输入图片地址" style="width:110px;"><br>
+<a href="#" class="ok">确定</a>&nbsp;
+<a href="#" class="start">打散</a>&nbsp;
+<a href="#" class="reset">还原</a>
+</div>
+<div class="box">
+</div>
+<div class="time"></div>
+
+</body>
+</html>

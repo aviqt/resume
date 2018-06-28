@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>个人桌面测试Demo(模拟)</title>
+    <meta charset="utf-8" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/style.css" rel="stylesheet" />
+    <script src="scripts/sylvester.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/PersonalDestop.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-10">
+                <div class="row">
+                    <div id="div_left" class="col-xs-4" style="background-color:blue;height:800px;padding:0px;">
+
+                    </div>
+                    <div id="div_right" class="col-xs-8" style="background-color:gainsboro;height:800px;padding:0px;">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2 menu" style="background-color:aquamarine;height:800px;">
+                <button id="btn_extend">扩大</button>
+                <button id="btn_shrink">缩小</button>
+                <button id="btn_add">新建</button>
+                <button id="btn_enterEdit">进入编辑</button>
+                <button id="btn_exitEdit">退出编辑</button>
+            </div>
+        </div>
+    </div>
+    <script>
+	
+		
+		var divsList = [];
+		var cellWidth = 80 ;
+		var cellHeight = 80;
+        var p=$("#div_right").PersonalDestop();
+		
+		
+		
+		
+		var divHtml = "<div class='divItem'>";
+			divHtml += "<div class='content'><div>Test</div></div>";
+			divHtml += "<div class='blackB'></div>";
+			divHtml += "<a class='divItemClear' onclick='clearContent(this)'>X</a>";
+			divHtml += "</div>";
+		var init=[
+				[0,0,2,1,divHtml],
+				[2,0,2,1,divHtml],
+				[4,0,2,1,divHtml],
+				[6,0,2,1,divHtml],
+				[0,1,4,2,divHtml],
+				[0,3,4,2,divHtml],
+				[4,1,4,4,divHtml]
+			];
+		for(var i=0;i<init.length;i++){
+			var divItem = p.AddDiv(init[i][0],init[i][1],init[i][2],init[i][3],init[i][4]);
+            if (divItem) divsList.push(divItem);
+		}
+		
+		
+		
+		function clearContent(obj){
+			var id2= $(obj).parent().attr("id2");
+			if(confirm("是否确认删除？")){
+				p.DelDiv(id2);
+				for(var i=0;i<divsList.length;i++){
+					if(divsList[i].id2==id2)break;
+				}
+				divsList.splice(i,1);
+				console.log(divsList.length);
+				console.log(divsList);
+			}
+			return false;
+		}
+	
+		
+		
+		
+		
+		$(".menu button").hide();
+		$("#btn_enterEdit").show();
+		$("#btn_enterEdit").click(function(){
+			$("#div_right").addClass("editMode");
+			$(".menu button").show();
+			$("#btn_enterEdit").hide();
+			clickToMoveDiv($(".divItem"));
+		})
+		$("#btn_exitEdit").click(function(){
+			$("#div_right").removeClass("editMode");
+			$(".menu button").hide();
+			$("#btn_enterEdit").show();
+			$(".divItem").unbind();
+		})
+		
+
+        $("#btn_extend").click(function () {
+            $("#div_left").hide();
+            $("#div_right").removeClass("col-xs-8");
+            $("#div_right").addClass("col-xs-12");
+			cellWidth=120;
+			p.RefreshGrid(cellWidth,cellHeight);
+        });
+        $("#btn_shrink").click(function () {
+            $("#div_right").removeClass("col-xs-12");
+            $("#div_right").addClass("col-xs-8");
+            $("#div_left").show();
+			cellWidth=80;
+			p.RefreshGrid(cellWidth,cellHeight);
+        });
+        $("#btn_add").click(function () {
+			var h = prompt('组件高度', '1');
+			if(h){
+				var w = prompt('组件宽度', '1');
+			}
+			if(!(h&&w))return;
+            var divItem = p.AddDiv(0, 0, w, h, divHtml);
+			if (divItem) divsList.push(divItem);
+			$(".divItem").unbind();
+			clickToMoveDiv($(".divItem"));
+        });
+        p.RefreshGrid(cellWidth,cellHeight);
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

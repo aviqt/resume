@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<title>关灯游戏</title>
+	<script src="jquery.min.js"></script>
+</head>
+<body>
+
+<style>
+	a:hover{color:orange;}
+	.box{background:gray;overflow:hidden;border-radius:10px;}
+	.item{color:white;float:left;margin:4px;width:42px;height:42px;cursor:pointer;line-height:42px;text-align:center;border-radius:50%;}
+	.s1{background:red;}
+	.s0{background:darkblue;}
+	.onlyInt{width:50px;}
+	.searchAnswer{display:none;}
+	.boxSize{}
+</style>
+
+
+
+<div class="boxSize">
+	Rows：<input type="text" id="rows" class="onlyInt" value="3">
+	Cols：<input type="text" id="cols" class="onlyInt" value="4">
+</div>
+<a onclick='changeBox($(".box"))' style="cursor:pointer;display:none">SetBox</a>
+<a onclick='randomBox($(".box"))' class="RandomBox" style="cursor:pointer;">RandomBox</a>
+<br><br>
+<div class="box"></div><br>
+<div class="searchAnswer">
+	<a onclick='getAnswer($(".box"))' style="cursor:pointer;">GetAnswer</a>
+</div>
+
+
+
+<script>
+
+var setState = false;
+var rows,cols;
+$(function(){        	
+	//文本框只能输入正整数，默认为1
+	$('.onlyInt').bind('input propertychange', function() {
+		var inpVal = $(this).val();
+		if(!(inpVal != "" && inpVal > 0)){ 
+			$(this).val(parseInt($(this).val()));
+			$(this).val($(this).val() == "NaN" ? 1 : $(this).val());
+		}else{
+		    if(inpVal.length > 1)$(this).val(inpVal.substr(1,1));
+		    if($(this).val()==0)$(this).val(1);
+		}
+	}); 
+})
+
+//设置盒子
+function changeBox(obj){
+	$(event.target).html(setState ? "SetBox" : "OK");
+	setState = !setState;
+	$(".boxSize,.searchAnswer,.RandomBox").hide();
+	if(!setState){
+		$(".boxSize,.searchAnswer,.RandomBox").show();
+		return;
+	}
+	rows = parseInt($("#rows").val()),
+	cols = parseInt($("#cols").val());
+	var items = []; 
+	for(var i = 0 ; i < rows * cols ; i++){
+		items[i] = 0;
+	}
+	setBox(items,obj,cols);
+}
+
+//随机盒子
+function randomBox(obj){
+	setState = false;
+	$(".searchAnswer").show();
+	rows = parseInt($("#rows").val()),
+	cols = parseInt($("#cols").val());
+	var items = []; 
+	for(var i = 0 ; i < rows * cols ; i++){
+		items[i] = 0;
+	}
+	setBox(items,obj,cols);
+	
+	var clickCount = Math.floor(Math.random()*cols*rows);
+	for(var i = 0 ; i < clickCount; i++){
+		obj.find("div").eq(Math.floor(Math.random()*cols*rows)).click();
+	}
+}
+
+//显示盒子
+function setBox(items,obj,columnCount){
+	obj.width( columnCount * 50 ).css("padding","5px");
+	var html = '';
+	for(var i=0;i<items.length;i++){
+		html += '<div onclick=itemClick(this) class="item s' + items[i] + '"></div>';
+	}
+	obj.html(html);
+}
+
+//单击事件
+function itemClick(obj){
+	var item = $(obj),
+		obj = item.parent(),
+		index=item.index(),
+		columnCount = obj.width()/50;
+	obj.find(".item").html("");
+	if(setState){
+		if(item.hasClass("s1")){
+			item.attr("class","item s0");
+		}else{
+			item.attr("class","item s1");
+		}
+		return;
+	}
+	var changeNumbers = [
+			index,
+			index % columnCount == 0 ? -1 : index - 1,
+			(index + 1)%columnCount == 0 ? -1 : index + 1 ,
+			index - columnCount ,
+			index + columnCount ,
+		];
+	for(var i = 0 ; i < changeNumbers.length ; i++){
+		if(changeNumbers[i] >= 0){
+			item = obj.find(".item").eq(changeNumbers[i]);
+			if(item.hasClass("s1")){
+				item.attr("class","item s0");
+			}else{
+				item.attr("class","item s1");
+			}
+		}
+	}
+}
+
+
+//求解
+function getAnswer(obj){
+	var objHtml = obj.html(),
+		hasGetAnswer = false,
+		arr = [];
+	for(var i = 0 ; i < cols ; i++){
+		arr[i] = i;
+	}
+	for(var i = 0 ; i < cols + 1 ; i++){
+		var r = choose(arr, i);
+		for(var j = 0;j < r.length; j++){
+			if(r[j].length != 0){
+				clickItems(r[j],obj);
+			}
+			for(var k = 0; k < obj.find("div").length - cols ; k++){
+				if(obj.find("div").eq(k).hasClass("s1")){
+					obj.find("div").eq(k + cols).click();
+					r[j].push(k + cols);
+				}
+			}
+			if(obj.find(".s1").length == 0  ) hasGetAnswer = true;
+			obj.html(objHtml);
+			if(hasGetAnswer){
+				markItems(r[j],obj);
+				break;
+			}
+		}
+		if(hasGetAnswer){
+			break;
+		}
+	}
+	if(!hasGetAnswer){
+		alert("No answer!"); 
+	} 
+	
+}
+
+
+//标记答案
+function markItems(items,obj){
+	for(var i = 0 ; i < items.length ; i++){
+		obj.find("div").eq(items[i]).html("!"); 
+	}
+}
+//模拟点击
+function clickItems(items,obj){
+	for(var i = 0 ; i < items.length ; i++){
+		obj.find("div").eq(items[i]).click();
+	}
+}
+
+
+  /*
+    组合主要用到了循环加递归的方式 实现的，个人觉得很是精辟，
+    举例来说吧choose([1,2,3,4,5,6], 3)
+    第一次循环的时候 arr是[1,2,3,4,5,6],size=3,result=[],
+    经过一次递归后的结果是什么样的了?递归里面也有循环递归
+    经过第一次循环第一次递归变为arr=[3,4,5,6],size=1,result=[1,2],所以结果就出来了[1,2,3][1,2,4][1,2,5][1,2,6]
+    那么第一次循环第二次递归arr=[4,5,6],size=1,result=[1,3],所以结果就出来了[1,3,4][1,3,5][1,3,6]
+    那么第一次循环第三次递归arr=[5,6],size=1,result=[1,4],所以结果就出来了[1,4,5][1,4,6]
+    那么第一次循环第四次递归arr=[6],size=1,result=[1,5],所以结果就出来了[1,5,6]
+    那么第二次循环第一次递归变为arr=[4,5,6],size=1,result=[2,3],所以结果就出来了[2,3,4][2,3,5][2,3,6]
+    */
+function choose(arr, size) {
+    var allResult = [];
+	if(size == 0) allResult[0] = [];
+    (function (arr, size, result) {
+        var arrLen = arr.length;
+        if (size > arrLen) {
+            return;
+        }
+        if (size == arrLen) {
+            allResult.push([].concat(result, arr))
+        } else {
+            for (var i = 0 ; i < arrLen; i++) {
+                var newResult = [].concat(result);
+                newResult.push(arr[i]);
+
+                if (size == 1) {
+                    allResult.push(newResult);
+                } else {
+                    var newArr = [].concat(arr);
+                    newArr.splice(0, i + 1);
+                    arguments.callee(newArr, size - 1, newResult);
+                }
+            }
+        }
+    })(arr, size, []);
+    return allResult;
+}
+</script>
+
+</body>
+</html>

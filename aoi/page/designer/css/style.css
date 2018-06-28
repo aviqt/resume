@@ -1,0 +1,79 @@
+*{margin:0px;padding:0px;overflow:hidden;font-family:微软雅黑;}
+body{height:100%;width:100%;}
+.main{border:45px solid #fbf2eb;position:relative;}
+.main_t{border-top:45px solid #48ecb6;}
+.main_b{border-bottom:45px solid #48ecb6;}
+.main_l{border-left:45px solid #48ecb6;}
+.main_r{border-right:45px solid #48ecb6;}
+
+
+
+.menu_team{height:45px;position:fixed;cursor:pointer;z-index:100;width:100%;top:0px;background:url(../images/menu-team.png) no-repeat center;}
+.menu_contact{height:45px;position:fixed;cursor:pointer;z-index:100;width:100%;bottom:0px;background:url(../images/menu-contact.png) no-repeat center;}
+.menu_stack{height:100%;position:fixed;cursor:pointer;z-index:100;width:45px;top:0px;left:0px;background:url(../images/menu-stack.png) no-repeat center;}
+.menu_work{height:100%;position:fixed;cursor:pointer;z-index:100;width:45px;top:0px;right:0px;background:url(../images/menu-work.png) no-repeat center;}
+
+.menu_team.on{background:url(../images/menu-team-blue.png) no-repeat center;}
+.menu_contact.on{background:url(../images/menu-contact-blue.png) no-repeat center;}
+.menu_stack.on{background:url(../images/menu-stack-blue.png) no-repeat center;}
+.menu_work.on{background:url(../images/menu-work-blue.png) no-repeat center;}
+
+
+
+/**********团队成员盒子*********/
+.team_box{background:url(../images/team.jpg);height:100%;position:absolute;width:100%;z-index:5;}
+
+.team_box .team_title{position:absolute;color:white;top:29%;left:6%;font-family: 微软雅黑;display:block;transform: rotateX(90deg);transition: all 0.5s;opacity:0;}
+.team_box .team_title.on{transform: rotateX(0deg);opacity:1;}
+
+
+.team_box .team_pic{position:absolute; top:40%;height:40%;left:5%;overflow:visible;width:10000px;}
+.team_item{height:100%;float:left;position:relative;}
+
+
+.team_item div{transition: all 0.5s;cursor:pointer;	backface-visibility: hidden;border-radius:5px;	position: absolute;left:0px;top:0px;}
+.team_item .team_item_pic{z-index:2;}
+.team_item .team_item_pic img{height:100%;width:100%;}
+.team_item .team_item_text{z-index:1;height:96%;width:90%;padding:2.5% 5%;background:#48ecb6;transform: rotateY(180deg);color:white;line-height:20px;}
+.team_item:hover .team_item_pic{z-index:1;transform: rotateY(180deg);}
+.team_item:hover .team_item_text{z-index:2;transform: rotateY(0deg);}
+
+
+.team_item .team_item_pic:before{  content:attr(data-text);  width:100%;  height:30px;  position:absolute;  left:0;  bottom:0;  line-height:30px;  text-align:center;  color:#48ecb6;  background-color:rgba(0,0,0,.3);}
+
+
+
+/****************content***************/
+.contact_box{background:url(../images/s2.jpg);height:100%;position:absolute;top:0px;left:0px;width:100%;z-index:5;}
+
+
+/****************stack***************/
+.stack_box{background:url(../images/stack.jpg);height:100%;position:absolute;top:0px;left:0px;width:100%;z-index:6;}
+
+
+
+/****************word***************/
+.work_box{background:#41403C;height:100%;position:absolute;top:0px;left:0px;width:100%;z-index:5;}
+
+.work_box .work_list{background:white;text-align:center;line-height:30px;bottom:0px;z-index:5;position:absolute;width:100%;bottom:-30px;}
+.work_box .work_list a{text-decoration:none;color:black}
+
+.work_box .work_left{width:35%;position:relative;float:left;height:100%;}
+.work_box .work_left .work_content{height:100%;position:absolute;top:50px;display:none;width:100%;background:#41403C}
+.work_box .work_left .work_content .work_title{font-weight:bold;font-size:100px;color:#48ecb6;padding:0 20px;line-height:150px;}
+.work_box .work_left .work_content .work_words{font-size:20px;color:#dddddd;padding:0 20px;line-height:30px;}
+
+
+.work_box .work_right{width:65%;position:relative;float:left;height:100%;}
+.work_box .work_right .work_pic {height:400px;position:absolute;top:50px;display:none;background-size:cover;}
+
+
+
+
+
+
+
+
+
+
+

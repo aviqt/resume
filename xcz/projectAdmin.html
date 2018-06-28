@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<title>项目管理</title>
+	<link href="style/main.css" rel="stylesheet" />
+	<link href="style/iframePage.css" rel="stylesheet" />
+	<script src="script/jquery.min.js"></script>
+	<script src="script/main.js"></script>
+	<script src="script/iframePage.js"></script>
+</head>
+<body>
+
+<div class="body" id="projectListBody">
+    <div class="box">
+		<div class="title_head">
+			<div>项目管理</div>
+			<span class="toBig">放大</span>
+		</div>
+        <div class="box_body">
+            <div class="hideScrollY">
+    			<div class="search_head">
+    				<div>任务名称：<input type="text" style="width:250px">   </div>        
+    				<div>所在区域：<select></select>                         </div>
+    				<div>所在街道：<select></select><br>                     </div>
+    				<div>开始日期：<input type="text">                       </div>
+    				<div>计划完成日期：<input type="text">                   </div>
+    				<div>任务类型：<select></select>                         </div>
+    				<div>任务状态：<select></select>                         </div>
+    				<div><input type="button" value="查询">                  </div>
+    			</div>
+                <div class="tableView" id="xmglList"></div>
+                <div class="pageView" id="xmglListPage"></div>
+                <div class="clearBoth"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="body" id="projectDetailBody">
+    <div class="box">
+        <div class="box_body">
+            <div class="hideScrollY">
+                <div id="xmglDetailBody">
+                    <div class="float_box">
+                        <div class="title">
+                            <div class="point"></div>
+                            <span>项目信息</span>
+                        </div>
+                        <div class="information">
+                            <div class="infor_item">
+                                <div class="infor_l">项目名称：</div>
+                                <div class="infor_r">三和街道规划车位，解决车子乱停</div>
+                            </div>
+                            <div class="infor_item">
+                                <div class="infor_l">所在区域：</div>
+                                <div class="infor_r">江东区</div>
+                            </div>
+                            <div class="infor_item">
+                                <div class="infor_l">所在街道：</div>
+                                <div class="infor_r">福明街道</div>
+                            </div>
+                            <div class="infor_item">
+                                <div class="infor_l">项目类型：</div>
+                                <div class="infor_r">整治环境卫生</div>
+                            </div>
+                            <div class="infor_item">
+                                <div class="infor_l">联系人：</div>
+                                <div class="infor_r">李丽</div>
+                            </div>
+                            <div class="infor_item">
+                                <div class="infor_l">联系电话：</div>
+                                <div class="infor_r">0574-88902365</div>
+                            </div>
+                            <div class="infor_item">
+                                <div class="infor_l">项目阶段：</div>
+                                <div class="infor_r">项目实施</div>
+                            </div>
+                            <div class="infor_item">
+                                <div class="infor_l">开始日期：</div>
+                                <div class="infor_r">2017-03-05</div>
+                            </div>
+                            <div class="infor_item">
+                                <div class="infor_l">计划完成：</div>
+                                <div class="infor_r">2017-05-02</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="float_box">
+                        <div class="title">
+                            <div class="point"></div>
+                            <span>资金列表</span>
+                        </div>
+                        <div class="tableView" id="capitalList"></div>
+                        <div class="pageView" id="capitalListPage"></div>
+                    </div>
+                    <div class="float_box">
+                        <div class="title">
+                            <div class="point"></div>
+                            <span>详细介绍</span>
+                        </div>
+                        <div class="text">
+                            <span>农贸市场是市容市貌的一扇窗口。为了搞好城市环境卫生，保障市民“舌尖上的安全”，县有关部门对县城明达农贸市场、平度农贸市场、海窜农贸市场进行升级改造，并通过专项整治，解决城区富锦市“脏、乱、差”待突出问题，切实加强市场内外的环境卫生管理，规范市场内各商户的经营行为，做到货物摆放规范有序，无占道经营现象，站台四周整治，同事，督促商户规范宰杀行为，完善熟食“四防”设施，富锦市的整体形象等到了很大提升。</span>
+                        </div>
+                    </div>
+
+                    <div class="float_box">
+                        <button onclick="returnProjectList()">返　　回</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        getXmglList(1);
+        getCapitalList(1);
+    })
+    /*项目列表获取*/
+    function getXmglList(pageIndex) {
+        var columns = [
+            { attr: "", name: "c1", html: "项目名称" },
+            { attr: "width='100'", name: "c2", html: "所在区域" },
+            { attr: "width='130'", name: "c3", html: "所在街道" },
+            { attr: "width='130'", name: "c4", html: "项目类型" },
+            { attr: "width='100'", name: "c5", html: "开始日期" },
+            { attr: "width='100'", name: "c6", html: "计划完成日期" },
+            { attr: "width='100'", name: "c7", html: "状态" },
+            { attr: "width='130'", name: "c8", html: "总体进度" },
+        ];
+        var tableData = [
+            { c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_f'>未开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectDetail()'" },
+            { c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_t'>已开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectDetail()'" },
+            { c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_t'>已开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectDetail()'" },
+            { c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_f'>未开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectDetail()'" },
+            { c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_f'>未开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectDetail()'" },
+            { c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_f'>未开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectDetail()'" },
+            { c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_t'>已开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectDetail()'" },
+            { c1: "沧海路扩展改革项目木", c2: "江东区", c3: "XX街道", c4: "整治环境卫生", c5: "2017-03-15", c6: "2017-06-15", c7: "<span class='state_f'>未开始</span>", c8: "<a class='td_btn'>项目实施</a>", attr: "onclick='showProjectDetail()'" },
+        ];
+        var obj = $("#xmglList");
+        showTable(columns, tableData, obj);
+		
+        var pageRow = 10;
+        var count = 951;
+        var fn = arguments.callee;
+        var pageObj = $("#xmglListPage");
+        setPage(pageIndex, pageRow, count, fn, pageObj);
+    }
+    /*资金列表获取*/
+    function getCapitalList(pageIndex) {
+        var columns = [
+            { attr: "", name: "c1", html: "资金名称" },
+            { attr: "", name: "c2", html: "资金金额（单位：万元）" },
+            { attr: "", name: "c3", html: "资金拔付时间" },
+            { attr: "", name: "c4", html: "资金用途" },
+        ];
+        var tableData = [
+            { c1: "资金名称", c2: "20", c3: "2017-05-06", c4: "整治环境卫生", attr: "" },
+            { c1: "资金名称", c2: "20", c3: "2017-05-06", c4: "整治环境卫生", attr: "" },
+            { c1: "资金名称", c2: "20", c3: "2017-05-06", c4: "整治环境卫生", attr: "" },
+            { c1: "资金名称", c2: "20", c3: "2017-05-06", c4: "整治环境卫生", attr: "" },
+            { c1: "资金名称", c2: "20", c3: "2017-05-06", c4: "整治环境卫生", attr: "" },
+            { c1: "资金名称", c2: "20", c3: "2017-05-06", c4: "整治环境卫生", attr: "" },
+        ];
+        var obj = $("#capitalList");
+        showTable(columns, tableData, obj);
+
+        var pageRow = 10;
+        var count = 951;
+        var fn = arguments.callee;	
+        var pageObj = $("#capitalListPage");
+        setPage(pageIndex, pageRow, count,fn, pageObj);
+    }
+
+    /*显示详细信息*/
+    function showProjectDetail() {
+        $("#projectListBody").hide();
+        $("#projectDetailBody").show();
+        $(".hideScrollY").parent().scrollTop(0);
+        hideScrollY($(".hideScrollY"));
+    }
+    /*显示列表*/
+    function returnProjectList() {
+        $("#projectListBody").show();
+        $("#projectDetailBody").hide();
+        hideScrollY($(".hideScrollY"));
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<title>我的桌面</title>
+	<link href="style/main.css" rel="stylesheet" />
+	<link href="style/iframePage.css" rel="stylesheet" />
+	<script src="script/jquery.min.js"></script>
+	<script src="script/main.js"></script>
+	<script src="script/iframePage.js"></script>
+</head>
+<body>
+    <div id="myDesktop_box" class="PD_editMode">
+        <div class="divItem" style="width:507px;height:199px;left:15px;top:15px;" title="x:0,y:0,w:6,h:2">
+            <div id="xcz_wdzm_db">
+                <div id="xcz_wdzm_db_head">
+                    <div>待办<span>36</span></div>
+                    <a>查看更多</a>
+                </div>
+                <div id="xcz_wdzm_db_body">
+                    <div id="xcz_wdzm_db_list"></div>
+                </div>
+            </div>
+        </div>
+        <div class="divItem" style="width:507px;height:199px;left:537px;top:15px;" title="x:7,y:0,w:6,h:2">
+            <div id="xcz_wdzm_xw">
+                <div id="xcz_wdzm_xw_head">
+                    <div>新闻</div>
+                    <a>查看更多</a>
+                </div>
+                <div id="xcz_wdzm_xw_body">
+                    <div id="xcz_wdzm_xw_body_l">
+                        <div id="xcz_wdzm_xw_picXw">
+                            <div>
+                                <img src="images/plus/wrjhp.jpg">
+                                <img src="images/plus/wrjhp.jpg">
+                                <img src="images/plus/wrjhp.jpg">
+                                <img src="images/plus/wrjhp.jpg">
+                                <img src="images/plus/wrjhp.jpg">
+                            </div>
+                        </div>
+                        <div id="xcz_wdzm_xw_picXw_menu">
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="xcz_wdzm_xw_body_r">
+                        <div id="xcz_wdzm_xw_menu">
+                            <a>行业动态</a>
+                            <a>发布政策</a>
+                            <a>公示信息</a>
+                        </div>
+                        <div id="xcz_wdzm_xw_list">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="divItem" style="width:681px;height:306px;left:15px;top:229px;" title="x:0,y:3,w:8,h:3">
+            <div id="xcz_wdzm_gzwcl">
+                <div id="xcz_wdzm_gzwcl_head">
+                    <div>工作完成率</div>
+                </div>
+                <div id="xcz_wdzm_gzwcl_body">
+                    <div id="xcz_wdzm_gzwcl_menu">
+                        <a class="xcz_wdzm_gzwcl_menu_on">县(市)区</a>
+                        <a>乡镇</a>
+                    </div>
+                    <div id="xcz_wdzm_gzwcl_list"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="divItem" style="width:333px;height:306px;left:711px;top:229px;" title="x:9,y:3,w:4,h:3">
+            <div id="xcz_wdzm_ztsj">
+                <div id="xcz_wdzm_ztsj_head">
+                    <div>专题数据</div>
+                </div>
+                <div id="xcz_wdzm_ztsj_body">
+                    <div id="xcz_wdzm_ztsj_map"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script>
+    /*小城镇-我的桌面-待办组件*/
+    function xczWdzmDbList() {
+        var columns = [
+                { attr: "", name: "c1", html: "名称" },
+                { attr: "width='80'", name: "c2", html: "当前环节" },
+                { attr: "width='100'", name: "c3", html: "开始日期" },
+            ];
+        var tableData = [
+                { c1: "市住房公积金暂停1月25日夜间服务的紧急通知", c2: "<span class='xcz_wdzm_db_state1'>受理</span>", c3: "2017-04-21", attr: "" },
+                { c1: "关于宁波市永恒案例鉴定机构备案的公示", c2: "<span class='xcz_wdzm_db_state2'>初审</span>", c3: "2017-04-21", attr: "" },
+                { c1: "关于宁波汇信房地产估价有限公司二级资质延续的公示", c2: "<span class='xcz_wdzm_db_state3'>审核</span>", c3: "2017-04-21", attr: "" },
+                { c1: "市住房公积金暂停1月25日夜间服务的紧急通知", c2: "<span class='xcz_wdzm_db_state4'>审批</span>", c3: "2017-04-21", attr: "" },
+            ];
+        var obj = $("#xcz_wdzm_db_list");
+        showTable(columns, tableData, obj);
+    }
+    xczWdzmDbList()
+
+	$("#xcz_wdzm_db_head a").click(function () {
+        window.parent.pageFullWeb();
+    });
+
+
+
+    /*小城镇-我的桌面-新闻组件*/
+    function xczWdzmXwPicList(boxObj, listObj, menuObj) {
+        var count = listObj.find("img").length;
+        var menuHtml = "";
+        var index = 0;
+        var imgW = 192;
+        var autoChangeTime = 5000;
+
+        listObj.find("img").width(boxObj.width());
+
+        for (var i = 0; i < count; i++) {
+            menuHtml += "<a></a>";
+        }
+        menuObj.html(menuHtml);
+        menuObj.find("a").click(function () {
+            index = $(this).index();
+            var left = -imgW * index;
+            listObj.animate({ "left": left + "px" });
+            menuObj.find("a").css({ "background": "" });
+            $(this).css({ "background": "orange" });
+        })
+        menuObj.find("a:eq(0)").click();
+
+
+        var sI = setInterval(function () {
+            index = index < count-1 ? index+1 : 0;
+            menuObj.find("a:eq(" + index + ")").click();
+        }, autoChangeTime);
+        boxObj.hover(function () {
+            clearInterval(sI);
+        }, function () {
+            sI = setInterval(function () {
+                index = index < count ? index + 1 : 0;
+                menuObj.find("a:eq(" + index + ")").click();
+            }, autoChangeTime);
+        })
+    }
+
+    $("#xcz_wdzm_xw_menu a").mouseover(function () {
+        $(this).siblings().removeClass("xcz_wdzm_xw_menu_on");
+        $(this).addClass("xcz_wdzm_xw_menu_on");
+        var index = $(this).index();
+        xczWdzmXwList(index)
+    })
+    function xczWdzmXwList(type) {
+        var columns = [
+                { attr: "", name: "c1", html: "标题" },
+                { attr: "width='80'", name: "c2", html: "发布日期" },
+        ];
+        var tableData = [];
+        tableData[0] = [
+                { c1: "0市住房公积金暂停1月25日夜间服务的紧急通知", c2: "2017-04-21", attr: "" },
+                { c1: "关于宁波市永恒案例鉴定机构备案的公示", c2: "2017-04-21", attr: "" },
+                { c1: "关于宁波汇信房地产估价有限公司二级资质延续的公示", c2: "2017-04-21", attr: "" },
+                { c1: "市住房公积金暂停1月25日夜间服务的紧急通知", c2: "2017-04-21", attr: "" },
+        ];
+        tableData[1] = [
+                { c1: "市住房公积金暂停1月25日夜间服务的紧急通知", c2: "2016-05-21", attr: "" },
+                { c1: "1关于宁波市永恒案例鉴定机构备案的公示", c2: "2017-04-12", attr: "" },
+                { c1: "关于宁波汇信房地产估价有限公司二级资质延续的公示", c2: "2017-01-22", attr: "" },
+                { c1: "市住房公积金暂停1月25日夜间服务的紧急通知", c2: "2017-04-21", attr: "" },
+        ];
+        tableData[2] = [
+                { c1: "市住房公积金暂停1月25日夜间服务的紧急通知", c2: "2016-08-21", attr: "" },
+                { c1: "关于宁波市永恒案例鉴定机构备案的公示", c2: "2016-10-21", attr: "" },
+                { c1: "2关于宁波汇信房地产估价有限公司二级资质延续的公示", c2: "2017-04-21", attr: "" },
+                { c1: "市住房公积金暂停1月25日夜间服务的紧急通知", c2: "2017-04-21", attr: "" },
+        ];
+        var obj = $("#xcz_wdzm_xw_list");
+        showTable(columns, tableData[type], obj);
+    }
+
+    $(function () {
+        xczWdzmXwPicList($("#xcz_wdzm_xw_body_l"), $("#xcz_wdzm_xw_picXw div"), $("#xcz_wdzm_xw_picXw_menu div"));
+        $("#xcz_wdzm_xw_menu a:eq(0)").mouseover();
+    })
+
+
+    /*小城镇-我的桌面-工作完成率组件*/
+    $("#xcz_wdzm_gzwcl_menu a").click(function () {
+        $(this).siblings().removeClass("xcz_wdzm_gzwcl_menu_on");
+        $(this).addClass("xcz_wdzm_gzwcl_menu_on");
+        var index = $(this).index();
+        xczWdzmGzwclList(index)
+    })
+    function xczWdzmGzwclList(type) {
+        var columns = [];
+        var tableData = [];
+
+        columns[0] = [
+                { attr: "", name: "c1", html: "所在县(市)区" },
+                { attr: "", name: "c2", html: "行政级别" },
+                { attr: "", name: "c3", html: "加强计划引领" },
+                { attr: "", name: "c4", html: "整治环境卫生" },
+                { attr: "", name: "c5", html: "整治城镇秩序" },
+                { attr: "", name: "c6", html: "整治乡容相貌" },
+                { attr: "", name: "c7", html: "排名" },
+                { attr: "", name: "c8", html: "总体完成进度" },
+        ];
+        tableData[0] = [
+                { c1: "海曙区", c2: "区", c3: "10", c4: "20", c5: "55", c6: "28", c7: "1", c8: "48%(15/45)", attr: "" },
+                { c1: "江东区", c2: "区", c3: "10", c4: "20", c5: "55", c6: "28", c7: "2", c8: "48%(15/45)", attr: "" },
+                { c1: "江北区", c2: "区", c3: "10", c4: "20", c5: "55", c6: "28", c7: "3", c8: "48%(15/45)", attr: "" },
+                { c1: "海曙区", c2: "区", c3: "10", c4: "20", c5: "55", c6: "28", c7: "4", c8: "48%(15/45)", attr: "" },
+                { c1: "海曙区", c2: "区", c3: "10", c4: "20", c5: "55", c6: "28", c7: "5", c8: "48%(15/45)", attr: "" },
+        ];
+
+
+        columns[1] = [
+                { attr: "", name: "c1", html: "所在县(市)区" },
+                { attr: "", name: "c2", html: "行政级别" },
+                { attr: "", name: "c3", html: "加强计划引领" },
+                { attr: "", name: "c4", html: "整治环境卫生" },
+                { attr: "", name: "c5", html: "整治城镇秩序" },
+                { attr: "", name: "c6", html: "整治乡容相貌" },
+                { attr: "", name: "c7", html: "排名" },
+                { attr: "", name: "c8", html: "总体完成进度" },
+        ];
+        tableData[1] = [
+                { c1: "2海曙区", c2: "区", c3: "10", c4: "20", c5: "55", c6: "28", c7: "1", c8: "48%(15/45)", attr: "" },
+                { c1: "江东区", c2: "区", c3: "10", c4: "20", c5: "55", c6: "28", c7: "2", c8: "48%(15/45)", attr: "" },
+                { c1: "江北区", c2: "区", c3: "10", c4: "20", c5: "55", c6: "28", c7: "3", c8: "48%(15/45)", attr: "" },
+                { c1: "镇海区", c2: "区", c3: "10", c4: "20", c5: "55", c6: "28", c7: "4", c8: "48%(15/45)", attr: "" },
+                { c1: "海曙区", c2: "区", c3: "10", c4: "20", c5: "55", c6: "28", c7: "5", c8: "48%(15/45)", attr: "" },
+        ];
+        var obj = $("#xcz_wdzm_gzwcl_list");
+        showTable(columns[type], tableData[type], obj);
+    }
+    $(function () {
+        $("#xcz_wdzm_gzwcl_menu a:eq(0)").click();
+    })
+</script>
+</body>
+</html>

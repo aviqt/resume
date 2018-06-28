@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>房屋情况</title>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/script.js"></script>
+    <link href="style/style.css" rel="stylesheet" />
+</head>
+<body>
+
+<div class="box">
+	
+	<div class="details">
+		<div class="details_head">房屋情况</div>
+		<div class="details_table_scrollBar"><div></div></div>
+		<div class="details_table">
+			<table>
+				<tr>
+					<td>房屋编码</td>
+					<td colspan="5"><span>宁波市-江东区-百丈街道-划船社区-项目-001（330204001006001001）</span></td>
+					<td colspan="2" rowspan="5"><img src="images/map_demo.jpg"></td>
+				</tr> 
+				<tr>
+					<td>（县）、市区</td>
+					<td colspan="2"><span>江东区</span></td>
+					<td>街道（镇）</td>
+					<td colspan="2"><span>百丈街道</span></td>
+				</tr> 
+				<tr>
+					<td>社区</td>
+					<td colspan="2"><span>划船社区</span></td>
+					<td>坐落地址</td>
+					<td colspan="2"><span>荷花一村14幢</span></td>
+				</tr> 
+				<tr>
+					<td>综合等级</td>
+					<td><span>四级</span></td>
+					<td>建造年份</td>
+					<td><span>1982</span></td>
+					<td>结构类型</td>
+					<td><span>砖混结构</span></td>
+				</tr> 
+				<tr>
+					<td>建筑面积（m²）</td>
+					<td><span>655</span></td>
+					<td>建造年份</td>
+					<td><span>1982</span></td>
+					<td>户、套均面积（m²）</td>
+					<td><span>43.67</span></td>
+				</tr> 
+				<tr>
+					<td>项目名称</td>
+					<td colspan="2"><span>项目一周霓</span></td>
+					<td>产权性质</td>
+					<td colspan="2"><span>房改房</span></td>
+					<td style="width:100px;">土地性质</td>
+					<td><span>城镇国有土地</span></td>
+				</tr> 
+				<tr>
+					<td>房屋状态</td>
+					<td colspan="2"><span>正常</span></td>
+					<td>基础情况</td>
+					<td colspan="2"><span>浅基础</span></td>
+					<td style="width:100px;">竣工日期</td>
+					<td><span>1982-01-01</span></td>
+				</tr> 
+				<tr style="height:119px;">
+					<td>层数</td>
+					<td colspan="2">
+						<span>
+							总共5层<br>
+							地上5层（地上第0至0层为商业用房；地上第0层为车棚层；地上第1至5层为住宅）；<br>
+							地下0层；
+						</span>
+					</td>
+					<td colspan="2">房屋饮食的住宅总套数（间数）</td>
+					<td colspan="3">
+						<span>
+							总共48套<br>
+							1、直管公房0套<br>
+							2、单位自管公房0套<br>
+							3、私房48套　在私房中：（1）商品房0套 （2）拆迁安置房48套<br>
+							4、其他0套
+						</span>
+					</td>
+				</tr> 
+				<tr>
+					<td>建设单位</td>
+					<td colspan="2"><span>中信江东房地产公司</span></td>
+					<td colspan="2">设计单位</td>
+					<td colspan="3"><span>宁波建筑设计研究院</span></td>
+				</tr> 
+				<tr>
+					<td>施工单位</td>
+					<td colspan="2"><span>南京市每六建筑安装工程有限公司</span></td>
+					<td colspan="2">监理单位</td>
+					<td colspan="3"><span>宁波方正建设监理有限公司</span></td>
+				</tr> 
+				<tr>
+					<td>产权单位</td>
+					<td colspan="7"><span></span></td>
+				</tr> 
+				<tr>
+					<td>产权单位负责人</td>
+					<td colspan="2"><span></span></td>
+					<td colspan="2">产权单位负责人电话</td>
+					<td colspan="3"><span></span></td>
+				</tr> 
+				<tr>
+					<td>产权单位联系人</td>
+					<td colspan="2"><span></span></td>
+					<td colspan="2">产权单位联系人电话</td>
+					<td colspan="3"><span></span></td>
+				</tr> 
+				<tr>
+					<td>物业公司</td>
+					<td colspan="7"><span>宁波江东区黎明物业管理有限公司</span></td>
+				</tr> 
+				<tr>
+					<td>物业单位负责人</td>
+					<td colspan="2"><span>吴飞成</span></td>
+					<td colspan="2">物业单位负责人电话</td>
+					<td colspan="3"><span>13562596321</span></td>
+				</tr> 
+				<tr>
+					<td>物业单位联系人</td>
+					<td colspan="2"><span>梅小芳</span></td>
+					<td colspan="2">物业单位联系人电话</td>
+					<td colspan="3"><span>13856423657</span></td>
+				</tr> 
+				<tr>
+					<td>属地管理社区负责人</td>
+					<td colspan="2"><span>胡科峰</span></td>
+					<td colspan="2">属地管理社区负责人电话</td>
+					<td colspan="3"><span>16854123687</span></td>
+				</tr> 
+				<tr>
+					<td>属地管理社区联系人</td>
+					<td colspan="2"><span>胡科峰</span></td>
+					<td colspan="2">属地管理社区联系人电话</td>
+					<td colspan="3"><span>16854123687</span></td>
+				</tr> 
+				<tr style="height:119px;">
+					<td>场地环境</td>
+					<td colspan="2">
+						<span>
+							房屋场地：平地<br>
+							化学侵蚀：无异常
+						</span>
+					</td>
+					<td colspan="2">历史使用</td>
+					<td colspan="3">
+						<span>
+							结构拆改：无拆改<br>
+							加层改造：无加层<br>
+							修缮加固：正常使用<br>
+							历史灾害：正常使用<br>
+							使用功能变更：无变更
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td>其他调查内容</td>
+					<td colspan="7"><span>相关附件资料见1幢</span></td>
+				</tr>  
+				<tr>
+					<td>鉴定情况</td>
+					<td colspan="7"><span>未做鉴定</span></td>
+				</tr>  
+				<tr>
+					<td>解危处置情况</td>
+					<td colspan="7"><span></span></td>
+				</tr>  
+				<tr>
+					<td>图纸资料</td>
+					<td colspan="2"><span>齐全</span></td>
+					<td colspan="2">图纸资料存档</td>
+					<td colspan="3"><span>江东档案馆</span></td>
+				</tr> 
+				<tr style="height:119px;">
+					<td>相关附件资料</td>
+					<td colspan="7">
+						<span>
+							1、立项文件　　　　2、规划许可　　　　3、竣工验收备案<br>
+							4、监理　　　　　　5、鉴定报告
+						</span>
+					</td>
+				</tr>
+				<tr>
+					<td>调查登记机构</td>
+					<td colspan="7"><span>宁波江东区黎明物业管理有限公司</span></td>
+				</tr> 
+				<tr>
+					<td>主管部门</td>
+					<td colspan="2"><span></span></td>
+					<td colspan="2">登记日期</td>
+					<td colspan="3"><span>2016-08-03</span></td>
+				</tr> 
+				<tr>
+					<td>填表人</td>
+					<td colspan="2"><span>梅晓芳</span></td>
+					<td colspan="2">审核人</td>
+					<td colspan="3"><span>胡科峰</span></td>
+				</tr> 
+			</table>
+		</div>
+	</div>
+	<div class="arrow"><div alt="1"></div></div>
+	
+	
+	
+	<div class="patrol">
+		<div class="patrol_head">
+			<div class="title">巡查情况</div>
+			<div class="date">
+				<div class="year_month">2016/12</div>
+				<div class="day">
+					<div>01</div>
+				</div>
+				<div class="button">
+					<div>-</div>
+					<div>+</div>
+				</div>
+			</div>
+		</div>
+		<div class="patrol_menu">
+			<div class="pm_item pm_item_on">
+				<div class="pmi_icon patrolIcon1"></div>
+				<div class="pmi_text">巡查工作记录</div>
+			</div>
+			<div class="pm_arrow"></div>
+			<div class="pm_item  ">
+				<div class="pmi_icon patrolIcon2"></div>
+				<div class="pmi_text">片区监管员工作记录</div>
+			</div>
+			<div class="pm_arrow"></div>
+			<div class="pm_item  ">
+				<div class="pmi_icon patrolIcon3"></div>
+				<div class="pmi_text">街道工作记录</div>
+			</div>
+			<div class="pm_arrow"></div>
+			<div class="pm_item pm_item_gray ">
+				<div class="pmi_icon patrolIcon4"></div>
+				<div class="pmi_text">区住建部门工作记录</div>
+			</div>
+			<div class="pm_arrow"></div>
+			<div class="pm_item pm_item_gray ">
+				<div class="pmi_icon patrolIcon5"></div>
+				<div class="pmi_text">反馈记录</div>
+			</div>
+		</div>
+		<div class="patrol_content">
+			<div class="patrol_table pt_on">
+				<table>
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="td_label">巡查人员</td>
+						<td colspan="2"><span>金灵</span></td>
+						<td class="td_label">巡查日期</td>
+						<td colspan="2"><span>2016-12-29</span></td>
+						<td class="td_label" colspan="5" style="text-align:left;padding-left:15px;">巡查照片</td>
+					</tr>
+					<tr>
+						<td class="td_label" rowspan="2">巡查情况</td>
+						<td colspan="5" style="height:77px;"><span>一梯3户，低洼平地，粉刷层塌落砂浆强度低，阳台挑梁钢筋膨胀开裂露筋。</span></td>
+						<td colspan="5" rowspan="2">
+							<img src="images/photo_demo.jpg">
+							<img src="images/photo_demo.jpg">
+							<img src="images/photo_demo.jpg">
+							<img src="images/photo_demo.jpg">
+							<img src="images/photo_demo.jpg">
+						</td>
+					</tr>
+					<tr>
+						<td class="td_label">其他情况</td>
+						<td colspan="4" ><span></span></td>
+					</tr>
+					<tr>
+						<td class="td_label">巡查户号</td>
+						<td colspan="10" ><span>101.102.103.201.202.203.301.302.303.401.402.403.501.502.503.601.602.603.701.702.703</span></td>
+					</tr>
+					<tr>
+						<td class="td_label">结构裂缝</td>
+						<td colspan="10" ><span></span></td>
+					</tr>
+					<tr>
+						<td class="td_label">初始等级</td>
+						<td colspan="2" ><span>I cs</span></td>
+						<td class="td_label">损坏等级</td>
+						<td colspan="2" ><span>I sh</span></td>
+						<td class="td_label">房屋等级</td>
+						<td colspan="4" ><span>一级</span></td>
+					</tr>
+					<tr>
+						<td class="td_label">沉降倾斜</td>
+						<td colspan="2" ><span>未超标</span></td>
+						<td class="td_label">其他情况</td>
+						<td colspan="7" ><span>外观无异常</span></td>
+					</tr>
+					<tr>
+						<td class="td_label">处理情况</td>
+						<td colspan="10" ><span></span></td>
+					</tr>
+					<tr>
+						<td class="td_label">填表人</td>
+						<td colspan="5" ><span>梅晓芳</span></td>
+						<td class="td_label">审核人</td>
+						<td colspan="4" ><span>胡科峰</span></td>
+					</tr>
+				</table>
+			</div>
+			<div class="patrol_table">
+				<table>
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="td_label" rowspan="100">记录工作信息</td>
+						<td class="td_label">记录时间</td>
+						<td colspan="4" ><span>2016-08-08</span></td>
+						<td class="td_label">记录人</td>
+						<td colspan="4" ><span>胡科峰</span></td>
+					</tr>
+					<tr>
+						<td colspan="10" ><span>上报到江东区住建部门</span></td>
+					</tr>
+					<tr>
+						<td class="td_label">记录时间</td>
+						<td colspan="4" ><span>2016-08-08</span></td>
+						<td class="td_label">记录人</td>
+						<td colspan="4" ><span>胡科峰</span></td>
+					</tr>
+					<tr>
+						<td colspan="10" ><span>上报到江东街道</span></td>
+					</tr>
+					<tr>
+						<td class="td_label">记录时间</td>
+						<td colspan="4" ><span>2016-08-08</span></td>
+						<td class="td_label">记录人</td>
+						<td colspan="4" ><span>胡科峰</span></td>
+					</tr>
+					<tr>
+						<td colspan="10" ><span>通过审核</span></td>
+					</tr>
+				</table>
+			</div>
+			<div class="patrol_table">
+				<table>
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="td_label" rowspan="100">记录工作信息</td>
+						<td class="td_label">记录时间</td>
+						<td colspan="4" ><span>2016-08-08</span></td>
+						<td class="td_label">记录人</td>
+						<td colspan="4" ><span>江东区街道</span></td>
+					</tr>
+					<tr>
+						<td colspan="10" ><span>查看上报情况</span></td>
+					</tr>
+					<tr>
+						<td class="td_label">记录时间</td>
+						<td colspan="4" ><span>2016-08-08</span></td>
+						<td class="td_label">记录人</td>
+						<td colspan="4" ><span>江东区街道</span></td>
+					</tr>
+					<tr>
+						<td colspan="10" ><span>查看上报情况</span></td>
+					</tr>
+				</table>
+			</div>
+			<div class="patrol_table">
+				<table>
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="td_label" rowspan="100">记录工作信息</td>
+						<td colspan="10" ><span></span></td>
+					</tr>
+				</table>
+			</div>
+			<div class="patrol_table">
+				<table>
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td class="td_label" rowspan="100">记录工作信息</td>
+						<td colspan="10" ><span></span></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="arrow"><div alt="2"></div></div>
+</div>
+
+</body>
+</html>

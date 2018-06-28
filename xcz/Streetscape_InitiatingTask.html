@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<title>日常巡查</title>
+	<link href="style/main.css" rel="stylesheet" />
+	<link href="style/iframePage.css" rel="stylesheet" />
+	<script src="script/jquery.min.js"></script>
+	<script src="script/main.js"></script>
+	<script src="script/iframePage.js"></script>
+</head>
+<body>
+<div class="body">
+    <div class="box">
+        <div class="box_head tab_head">
+            <div>编辑</div>
+            <div>表单列表</div>
+			<span class="toBig">放大</span>
+        </div>
+        <div class="box_body tab_body" id="rcxzbj_body">
+            <div class="absolute_box">
+				<div class="absolute_inner">
+					<select>
+						<option>整治环境卫生</option>
+						<option>保持水体清洁</option>
+					</select>
+					<select>
+						<option>保持水体清洁</option>
+						<option>整治环境卫生</option>
+					</select>
+					<div class="ruleList">
+						<div class="hideScrollY">
+							<div class="ruleItem">水域保洁到位，水质和水面洁净，水面无漂浮物，无乱倒生活和建设垃圾现象</div>
+							<div class="ruleItem">推进水系清淤疏浚、自然流通</div>
+						</div>
+					</div>
+				</div>
+			</div>
+            <div class="absolute_box">
+				<div class="sMap"></div>
+			</div>
+            <div class="absolute_box">
+				<div class="absolute_inner">
+					<div class="information">
+						<div class="infor_item">
+							<div class="infor_l">任务名称：</div>
+							<div class="infor_r" id="taskName"></div>
+						</div>
+						<div class="infor_item">
+							<div class="infor_l">任务地址：</div>
+							<div class="infor_r">鄞州区邱隘街道46弄</div>
+						</div>
+					</div>
+					<div class="scoreForm">
+						<div class="hideScrollY">
+							第1张/共5张
+							<div class="photoList">
+								<a class="prevPhoto"><</a>
+								<div class="photoBox">
+									<img src="images/bodybg.png">
+								</div>
+								<a class="nextPhoto">></a>
+							</div>
+							<div class="clearBoth"></div>
+							<textarea placeholder="请输入问题描述"></textarea>
+							<div class="scoreContent">
+								扣分说明：
+								<div>扣分项：<span id="score_kfx"></span></div>
+								<div>扣　分：<span id="score_kf">-1分</span></div>
+								提交人：<span id="score_tjr">王万里</span><br>
+								提交时间：<span id="score_tjsj">2017-03-25</span>
+							</div>
+							<div class="screBtns">
+								<button>提　　交</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+        <div class="box_body tab_body">
+			<div class="search_head">
+				<div>任务名称：<input type="text" style="width:250px">   </div>        
+				<div>所在区域：<select></select>                         </div>
+				<div>所在街道：<select></select><br>                     </div>
+				<div>任务状态：<select></select>                         </div>
+				<div><input type="button" value="查询">                  </div>
+			</div>
+			<div class="hideScrollY">
+				<div class="tableView" id="rcxzbdlbList"></div>
+				<div class="pageView" id="rcxzbdlbListPage"></div>
+				<div class="clearBoth"></div>
+			</div>
+        </div>
+    </div>
+</div>
+<script>
+$(function(){
+
+	getRcxzbdlbList(1);
+	
+	/*造反扣分项*/
+    $(".ruleItem").click(function () {
+        $(this).siblings().removeClass("active");
+        $(this).addClass("active");
+		$("#taskName ,#score_kfx").html($(this).html());
+    })
+	
+	$(".photoBox img").click(function(){
+		var imgSrc = $(this).attr("src");
+		window.parent.isPageFullWeb = false;
+		window.parent.pageFullWeb();
+	})
+})
+/*列表获取*/
+function getRcxzbdlbList(pageIndex) {
+	var columns = [
+		{ attr: "width='40' style='background:#a2d200;color:white;cursor:pointer;'", name: "c1", html: "+" },
+		{ attr: "", name: "c2", html: "表单标题" },
+		{ attr: "width='200'", name: "c3", html: "类别" },
+		{ attr: "width='150'", name: "c4", html: "流程" },
+		{ attr: "width='100'", name: "c5", html: "状态" },
+		{ attr: "width='100'", name: "c6", html: "提交人" },
+	];
+	var tableData = [
+		{ c1: "<input type='checkbox'>", c2: "东环南路河清段综合整治工作", c3: "整治环境卫生", c4: "<a class='td_btn'>查看流程图</a>", c5: "已提交", c6: "王勇", attr: "" },
+		{ c1: "<input type='checkbox'>", c2: "东环南路河清段综合整治工作", c3: "整治环境卫生", c4: "<a class='td_btn'>查看流程图</a>", c5: "已提交", c6: "王勇", attr: "" },
+		{ c1: "<input type='checkbox'>", c2: "东环南路河清段综合整治工作", c3: "整治环境卫生", c4: "<a class='td_btn'>查看流程图</a>", c5: "已提交", c6: "王勇", attr: "" },
+		{ c1: "<input type='checkbox'>", c2: "东环南路河清段综合整治工作", c3: "整治环境卫生", c4: "<a class='td_btn'>查看流程图</a>", c5: "已提交", c6: "王勇", attr: "" },
+		{ c1: "<input type='checkbox'>", c2: "东环南路河清段综合整治工作", c3: "整治环境卫生", c4: "<a class='td_btn'>查看流程图</a>", c5: "已提交", c6: "王勇", attr: "" },
+		{ c1: "<input type='checkbox'>", c2: "东环南路河清段综合整治工作", c3: "整治环境卫生", c4: "<a class='td_btn'>查看流程图</a>", c5: "已提交", c6: "王勇", attr: "" },
+		{ c1: "<input type='checkbox'>", c2: "东环南路河清段综合整治工作", c3: "整治环境卫生", c4: "<a class='td_btn'>查看流程图</a>", c5: "已提交", c6: "王勇", attr: "" },
+		{ c1: "<input type='checkbox'>", c2: "东环南路河清段综合整治工作", c3: "整治环境卫生", c4: "<a class='td_btn'>查看流程图</a>", c5: "已提交", c6: "王勇", attr: "" },
+		{ c1: "<input type='checkbox'>", c2: "东环南路河清段综合整治工作", c3: "整治环境卫生", c4: "<a class='td_btn'>查看流程图</a>", c5: "已提交", c6: "王勇", attr: "" },
+		{ c1: "<input type='checkbox'>", c2: "东环南路河清段综合整治工作", c3: "整治环境卫生", c4: "<a class='td_btn'>查看流程图</a>", c5: "已提交", c6: "王勇", attr: "" },
+	];
+	var obj = $("#rcxzbdlbList");
+	showTable(columns, tableData, obj);
+
+	var pageRow = 10;
+	var count = 951;
+	var fn = arguments.callee;
+	var pageObj = $("#rcxzbdlbListPage");
+	setPage(pageIndex, pageRow, count,fn, pageObj);
+}
+</script>
+
+</body>
+</html>

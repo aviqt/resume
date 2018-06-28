@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<title>Iframe</title>
+	<script src="script/jquery.min.js"></script>	
+	<script src="md5.js"></script>	
+	<script src="script/index.js"></script>	
+	<link href="style/index.css" rel="stylesheet"/>	
+</head>
+<body>
+<div class="main">
+	<div class="menubox">
+		<div class="menu"></div>
+	</div>
+	<div class="content">
+		<div class="tab_menu"></div>
+		<div class="tab_body"></div>
+	</div>
+</div>
+<script>
+	alert( hex_md5('111111'));
+	$(function(){
+		var menuData = [
+			{text:"游戏",id:"1",pid:"0",url:""},
+			 {text:"拼图",id:"101",pid:"1",url:"page/game/Puzzle/Puzzle.html"},
+			 {text:"黑白棋初级",id:"102",pid:"1",url:"page/game/Black white/Black white.html"},
+			 {text:"熄灯大作战",id:"103",pid:"1",url:"page/game/Turn off the lights/Turn off the lights.html"},
+			 {text:"图片转盘",id:"104",pid:"1",url:"page/game/Turn Img/turnImg.html"},
+			{text:"常用网站",id:"2",pid:"0",url:""},
+			 {text:"百度搜索",id:"201",pid:"2",url:"http://www.baidu.com"},
+			 {text:"腾讯首页",id:"201",pid:"2",url:"http://www.qq.com"},
+			{text:"菜单测试",id:"3",pid:"0",url:""},
+			 {text:"二级菜单",id:"301",pid:"3",url:""},
+			  {text:"团队介绍",id:"-",pid:"301",url:"page/designer/index.html"},
+			  {text:"房屋情况",id:"-",pid:"301",url:"page/house/index.html"},
+			  {text:"个性化编辑",id:"-",pid:"301",url:"page/PersonalDesktop/index.html"},
+			  {text:"Echarts可视化",id:"-",pid:"301",url:"page/visualization/index.html"},
+			 {text:"二级菜单",id:"302",pid:"3",url:""},
+			  {text:"三级菜单",id:"-",pid:"302",url:""},
+			  {text:"方向判断",id:"-",pid:"302",url:"page/other/direction/1.html"},
+			  {text:"表格",id:"-",pid:"302",url:"page/other/Schedule/schedule.html"},
+			{text:"其它",id:"4",pid:"0",url:""},
+			 {text:"二级菜单",id:"401",pid:"4",url:""},
+			  {text:"三级菜单",id:"-",pid:"401",url:""},
+		];
+		getMenu(menuData);
+	})
+</script>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+.container{
+  width:1360px;
+  margin:50px auto;
+}
+.flip{
+	width:282px;
+	height: 377px;
+	margin:20px;
+	float:left;
+	position: relative;
+	perspective: 1000px;
+}
+.flip div{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	transition: all 1s ease;
+	transform-style: preserve-3d;
+	backface-visibility: hidden;
+	box-shadow: 2px 2px 20px rgba(0,0,0,.5);
+	border-radius:8px;
+}
+.flip div.front{
+	background: url(http://thecodeplayer.com/uploads/media/3yiC6Yq.jpg);
+	z-index: 1;
+}
+.flip div:before{
+  content:attr(data-text);
+  width:100%;
+  height:30px;
+  position:absolute;
+  left:0;
+  bottom:0;
+  line-height:30px;
+  text-align:center;
+  color:#fff;
+  background-color:rgba(0,0,0,.3);
+}
+.flip div.back{
+	background: url(http://thecodeplayer.com/uploads/media/40Ly3VB.jpg);
+	z-index: 2;
+}
+.flip:hover div.front{
+	z-index: 2;;
+}
+.flip:hover div.back{
+	z-index: 1;;
+}
+.Y div.back{
+  transform:rotateY(180deg);
+}
+.Y:hover div.front{
+  transform:rotateY(180deg);
+}
+.Y:hover div.back{
+  transform:rotateY(0deg);
+}
+.X div.back{
+  transform:rotateX(180deg);
+}
+.X:hover div.front{
+  transform:rotateX(180deg);
+}
+.X:hover div.back{
+  transform:rotateX(0deg);
+}
