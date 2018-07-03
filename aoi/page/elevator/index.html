@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"> 
+  <title>加装电梯</title>
+  <script src="jquery.min.js"></script>
+  <link href="style/index.css" rel="stylesheet" />
+</head>
+<body>
+<script>
+	$(document).ready(function(){
+	  $(".select-box li").click(function(e){
+		var selectBox = $(this).parents('.select-box');
+		selectBox.find("span").html($(this).html());
+		selectBox.find("ul").hide();
+		e.stopPropagation();
+	  })
+	  $(".select-box").click(function(e){
+		$(this).find("ul").show();
+		e.stopPropagation();
+	  })
+	  $("body").click(function(){
+	    $(".select-box ul").hide();
+	  })
+	})
+</script>
+
+<div class="top">
+  <div class="top-inner">
+    <div class="logo">加装电梯</div>
+    <div class="top-menu">
+      <a href="#申请流程">申请流程</a>
+      <a href="#注意事项">注意事项</a>
+      <a href="#推荐总包">推荐总包</a>
+    </div>
+  </div>
+</div>
+
+<div class="banner">
+  <div class="list">
+    <div class="search-bar">
+      <div class="select-box">
+        <span>宁波</span>
+		<ul>
+			<li>宁波1</li>
+			<li>宁波2</li>
+			<li>宁波3</li>
+		</ul>
+      </div>
+      <div class="text-box">
+        <input type="text" placeholder="输入小区名" />
+        <a>搜 索</a>
+      </div>
+    </div>
+    <div class="list-body">
+	  <ul>
+	    <li>
+		  <div class="build">蝴蝶海苑（三期）2栋3单元</div>
+		  <div class="time">申请时间：2018.06.10</div>
+		  <div class="status">审批中</div>
+	    </li>
+	    <li>
+		  <div class="build">蝴蝶海苑（三期）2栋3单元</div>
+		  <div class="time">申请时间：2018.06.10</div>
+		  <div class="status status_s">已通过</div>
+	    </li>
+	    <li>
+		  <div class="build">蝴蝶海苑（三期）2栋3单元</div>
+		  <div class="time">申请时间：2018.06.10</div>
+		  <div class="status status_f">未通过</div>
+	    </li>
+	  </ul>
+	</div>
+  </div>
+</div>
+
+<a name="申请流程"></a>
+<div class="box">
+	<div class="title">申请流程</div>
+	<div class="process">
+		<div class="process-step process-step-r" style="top:50px;">
+			<div class="title process-step-title-1">1.提出申请</div>
+			<div class="content">
+				申请人申请加装电梯的，应当向属地住建部门提出申请，并提交以下材料：<br />
+				1、签署“加装电梯协议书”和签署意见的相关业主房屋产权证、身份证明；<br />
+				2、经公示且无异议的加装电梯方案应当在本住宅小区、本幢、本单元等显著位置进行公示，公示时间应不少于10个工作日。申请人公示时应当同时公开异议受理电话。公示有异议的，应当注明异议协商处理情况和结果业主认为因加装电梯侵犯了自己的所有权和相邻权等民事权益而提出补偿等要求的，由业主之间协商解决，也可以申请街道、社区、基层人民调解组织协调解决。协商或调解不成的，可依法通过民事诉讼途径解决。<br />
+			</div>
+		</div>
+		<div class="process-step process-step-l" style="top:155px;">
+			<div class="title process-step-title-2">2.联合审查</div>
+			<div class="content">
+				属地住建部门收到申请人申请，应当在5个工作日内向规划、特种设备案例监督管理、消防、综合执法、电力等部门发出并联合审查意见书(附件二)，征询相关部门应当在收到联合审查意见书后5个工作日内签署意见，并加盖本单位公章后反馈属地住建部门，相关部门审查意见应当注明“同意”或“不同意”；未表达明确态度的，属地住建部门可以退回要求重新提出审查意见，审查意见时间不再延长；相关部门不同意的，应当详细说明理由，提出建设性意见，并做好解释说明工作。规划、特种设备案例监督管理、消防、综合执法部门同时作出“同意”审查意见后，属地住建部门应当同意加装电梯。
+			</div>
+		</div>
+		<div class="process-step process-step-r" style="top:403px;">
+			<div class="title process-step-title-3">3.实施加装</div>
+			<div class="content">
+				申请人申请加装成功后，可以实行电梯采购，委托开展设计、施工，与相关单位签订《加装电梯施工承包合同》，明确合同各方权利、义务和质量保修责任、义务；特种设备案例监督管理部门应当按照特种设备案例技术规范要求，开展加装电梯安全监督检验。
+			</div>
+		</div>
+		<div class="process-step process-step-l" style="top:530px;">
+			<div class="title process-step-title-4">4.使用登记</div>
+			<div class="content">
+				申请人或者受委托电梯使用管理单位与具有相应资质的电梯维护保养单位签订维护保养合同，并依法向特种设备安全监督管理部门办理使用登记，取得使用登记证。
+			</div>
+		</div>
+	</div>
+</div>
+
+<a name="注意事项"></a>
+<div class="box" style="background:#dae8f6;">
+	<div class="title">注意事项</div>
+	<div class="img-text">
+		<img src="images/1.png" style="margin-right:20px;"/>
+		<div class="text">
+			<div class="title">申请和实施主体</div>
+			<div class="content">
+				电梯加装的申请和实施主体为本幢或本单元全体业主。<br />
+				按照“谁所有、谁出资、谁负责”的原则。<br />
+				申请和实施主体可委托电梯加装总承包企业、物业服务企业等第三方单位办理电梯加装具体事宜。<br />
+			</div>
+		</div>
+	</div>
+	<div class="img-text">
+		<img src="images/2.png" style="float:right;"/>
+		<div class="text">
+			<div class="title">加装电梯基本条件</div>
+			<div class="content">
+				（一）未列入《宁波市既有多层住宅加装厢式负面清单》。<br />
+				（二）以幢为单位加装电梯的，应经本幢建筑物总面积三分之二以上的业主且占总人数三分之二以上的业主同意；<br />
+				<span>（二）</span>单元为单位加装电梯的，应经单元全体业主同意。<br />
+				（三）电梯加装方案公示后，相关利害人无异议。<br />
+			</div>
+		</div>
+	</div>
+</div>
+
+<a name="推荐总包"></a>
+<div class="box">
+	<div class="title">推荐总包</div>
+	<div class="img-link">
+		<a href="https://www.baidu.com" target="_blank"><img src="images/tjzb.png" /></a>
+		<a href="https://www.baidu.com" target="_blank"><img src="images/tjzb.png" /></a>
+		<a href="https://www.baidu.com" target="_blank"><img src="images/tjzb.png" /></a>
+		<a href="https://www.baidu.com" target="_blank"><img src="images/tjzb.png" /></a>
+		<a href="https://www.baidu.com" target="_blank"><img src="images/tjzb.png" /></a>
+	</div>
+</div>
+</body>
+</html>
