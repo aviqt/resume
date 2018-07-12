@@ -1,0 +1,68 @@
+*{margin:0px;padding:0px;box-sizing:border-box;color:#333;}
+input{outline:none;}
+ul li{list-style:none;}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+ /* WebKit browsers */ 
+color: #dae4f2; 
+} 
+input:-moz-placeholder, textarea:-moz-placeholder { 
+/* Mozilla Firefox 4 to 18 */ 
+color: #dae4f2; 
+} 
+input::-moz-placeholder, textarea::-moz-placeholder { 
+ /* Mozilla Firefox 19+ */ 
+color: #dae4f2; 
+} 
+input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+ /* Internet Explorer 10+ */ 
+color: #dae4f2; 
+}
+a{cursor:pointer;text-decoration:none;}
+
+
+.step-box{max-width:1200px;margin:0 auto;padding:20px}
+
+.step-line{display:-webkit-flex;display:flex; flex-direction: row ;justify-content:center;overflow:hidden;}
+.step-line > .item{position:relative;margin:5px;flex-grow:1;height:40px;float:left;width:25%;}
+.step-line > .item:before{content:'';z-index:1;position:absolute;height:20px;border-bottom:1px solid #ddd;top:0;left:0;width:100%;}
+.step-line > .item .stepNum{content:'';background:white;z-index:3;background:url(images/process-status.png) no-repeat 3px -77px;position:absolute;left:0px;top:0px;height:40px;width:40px;border-radius:50%;color:#bbb;line-height:38px;text-align:center;overflow:hidden;}
+.step-line > .item span{color:#aaa;font-size:18px;z-index:2;position:relative;display:inline-block;line-height:38px;padding:0 10px 0 45px;background:white;}
+.step-line > .active .stepNum{color:white;background-position:3px -39px;}
+.step-line > .completed .stepNum{background-position:3px -2px;text-indent:-100em;}
+.step-line > .active span{color:#333;font-weight:bold;}
+.step-line > .completed span{color:#333;}
+
+
+.step-content{margin:20px 0;}
+.step-content > .item{display:none;text-align:center;}
+.step-content > .active{display:block;}
+
+.step-menu {text-align:center;}
+.step-menu a{display:inline-block;line-height:35px;border:1px solid #bbb;border-radius:5px;padding:0 15px;}
+.step-menu a:hover{background:#f5f5f5;}
+.step-menu .btnBlue{display:inline-block;line-height:35px;background:#1890ff;color:white;border:1px solid #1890ff;border-radius:5px;padding:0 15px;}
+.step-menu .btnBlue:hover{background:#0779ee;border:1px solid #0779ee;}
+
+
+
+.flow-box{}
+.flow-title{border-bottom:1px solid #ddd;line-height:35px;text-align:left;padding-left:15px;font-size:18px;margin:10px 0 20px 0;}
+.flow-body{display:-webkit-flex;display:flex;flex-direction: row ;justify-content:center;padding-left:40px;}
+.flow-body > div{position:relative;flex-grow:1;padding-top:15px;}
+.flow-body > div > div {font-size:14px;text-align:left;margin-left:-25px;color:#8d8d8d;}
+.flow-body > div > div span{font-size:16px;line-height:30px;color:#8d8d8d;}
+.flow-body > div > div a{color:#8d8d8d;}
+.flow-body > .completed  div span{color:#333;}
+.flow-body > .active  div span{color:#333;font-weight:bold;}
+.flow-body > .active  div a{color:#1890ff;}
+.flow-body > div:before{content:'';position:absolute;height:8px;width:8px;background:#ddd;left:4px;top:3px;border-radius:50%;}
+.flow-body > .item:after{content:'';position:absolute;background:#ddd;height:2px;right:0;left:16px;top:6px;}
+.flow-body > .active:before{height:12px;width:12px;top:1px;left:2px;background:#1890ff}
+.flow-body > .completed:before{background:#1890ff}
+.flow-body > .completed:after{background:#1890ff}
+
+
+
+
+
+
