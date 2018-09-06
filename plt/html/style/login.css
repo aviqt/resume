@@ -1,0 +1,78 @@
+*{color:#ddd;}
+
+body{background:url(images/body-background.png);}
+.loginBox{height:750px;width:500px;position:absolute;right:50%;top:50%;margin-top:-375px;margin-right:-250px;}
+.loginBox div{position:relative;}
+
+.loginBox .title{text-align:center;font-size:38px;line-height:40px;margin-bottom:20px;background: linear-gradient(to bottom, white, #1491da); -webkit-background-clip: text;color:transparent;}
+.loginBox .plusBox{line-height:40px;padding:0 20px;}
+
+.loginBox .plusBox a{font-size:14px;text-decoration:underline;float:right;color:white;}
+.loginBox .plusBox label{font-size:14px;cursor:pointer;}
+.loginBox .plusBox label input[type='checkbox']{margin-right:3px;vertical-align:sub;}
+
+.loginBox .formBox{box-shadow:0 0 10px 2px white inset;height:650px;border-radius:5px;}
+.loginBox .formBox form{background:white;position:absolute;padding:0 50px;border-radius:3px;right:20px;bottom:20px;top:20px;left:20px;}
+.loginBox .formBox form .loginLogo{text-align:center;padding:50px 0 30px 0;}
+.loginBox .formBox form .plusBtnBox{text-align:center;line-height:50px;}
+.loginBox .formBox form .plusBtnBox a{font-size:14px;color:#aaa;}
+
+.loginBox .formBox form .verCode{display:inline-block;}
+.loginBox .formBox form .verCode img{margin:0 5px;}
+.loginBox .formBox form .verCode a{text-decoration:underline;color:#999;}
+
+.loginBox .formBox button{
+	margin-top:30px;
+	outline:none;
+	display:block;
+	height:50px;
+	width:100%;
+	border:none;
+	color:white;
+	font-size:16px;
+	background:#265bbb;
+	border-radius:8px;
+	cursor:pointer;
+}
+.loginBox .formBox button:hover{
+	background:#154aaa;
+}
+.loginBox .formBox input[type='text'],
+.loginBox .formBox input[type='password']{
+	display:inline-block;
+	width:100%;
+	height:42px;
+	line-height:42px;
+	padding:0px 12px;
+	padding-top:2px;
+	background:#eaeaec;
+	border:none;
+	border-radius:8px;
+	margin-top:20px;
+	font-size:16px;
+	color:#333;
+	vertical-align:sub;
+}
+
+
+
+
+
+.userLogin{transform:skewX(-15deg);background:#4b565a;right:0;top:0;margin:0;height:100%;width:650px;}
+.userLogin .formBox{box-shadow:none;transform:skewX(15deg);width:500px;background:none;margin-left:50px;margin-top:-325px;top:52%;left:20px;}
+.userLogin .formBox .loginLogo{margin-left:-10px;}
+.userLogin .formBox form{background:none;}
+.userLogin .formBox form .plusBtnBox a{font-size:14px;color:#dddddd;}
+.userLogin .formBox form .verCode a{text-decoration:underline;color:#b5e3fd;}
+.userLogin .formBox button{margin-top:35px;background:#ffbd30}
+.userLogin .formBox button:hover{background:#eeac20;}
+.userLogin .formBox input[type='text'],.userLogin .formBox input[type='password']{background:white;margin-top:30px;}
+.userLogin .formBox form .plusBtnBox{overflow:hidden;padding:0 10px;}
+.userLogin .formBox form .plusBtnBox label{font-size:14px;cursor:pointer;float:left;}
+.userLogin .formBox form .plusBtnBox label input[type='checkbox']{margin-right:3px;vertical-align:sub;}
+
+
+
+
+
+

@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'> 
+  <title>布兰图智慧能源管控平台</title>
+  <script src='libs/jquery.min.js'></script>
+  <script src='libs/bootstrap/bootstrap.min.js'></script>
+  <script src='libs/bootstrap-table/bootstrap-table.min.js'></script>
+  <script src='libs/bootstrap-table/locale/bootstrap-table-zh-CN.min.js'></script>
+  <script src="libs/My97DatePicker/WdatePicker.js"></script>
+  
+  <link href='libs/bootstrap/bootstrap.min.css' rel='stylesheet' />
+  <link href='libs/bootstrap-table/bootstrap-table.min.css' rel='stylesheet' />
+  <link href='style/main.css' rel='stylesheet' />
+  <link href='style/table-list.css' rel='stylesheet' />
+  
+  
+  
+</head>
+<body>
+
+
+<div class='searchBox'>
+  <select class="form-control" >
+  	<option>请选择计表</option>
+  	<option>请选择计表1</option>
+  	<option>请选择计表2</option>
+  	<option>请选择计表3</option>
+  	<option>请选择计表4</option>
+  </select>
+  <input type='text' placeholder='请输入关键字' class="form-control" />
+  <input class="Wdate" placeholder='请选择日期'  type="text" onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd'})"> 
+  <button type='butotn' >查询</button>
+  <button type='butotn' >彻底删除</button>
+</div>
+<div class='tableList'>
+	<table id="table" >
+	</table>
+</div>
+
+<script>
+var data = [];
+
+for(var i= 0;i<1000;i++){
+  data.push({
+    code:'123',
+	id:i,
+	name:'item',
+	customer:'农业局大厦',
+	electricQuantity:'<span style="color:#7facff">'+(Math.random()*50000).toFixed(2)+'</span>',
+  })
+}
+
+$('#table').bootstrapTable({
+	onClickRow:function(r,e){console.log(r);},
+    pagination: true,
+    striped: true,
+    clickToSelect: true,
+    pageSize: 10,
+    columns: [{
+	    checkbox: true,
+    }, {
+        field: 'id',
+        title: '序号',
+		align: 'center',
+		valign: 'middle' ,
+		width:50
+    }, {
+        field: 'name',
+        title: '表名',
+		align: 'center',
+		valign: 'middle' 
+    }, {
+        field: 'customer',
+        title: '客户',
+		align: 'center',
+		valign: 'middle' 
+    }, {
+        field: 'electricQuantity',
+        title: '电量',
+		align: 'center',
+		valign: 'middle' 
+    }],
+    data: data
+});
+</script>
+
+
+
+
+</body>
+</html>

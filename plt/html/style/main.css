@@ -1,0 +1,36 @@
+*{margin:0px;padding:0px;box-sizing:border-box;font-size:12px;}
+input{outline:none;vertical-align:sub;}
+body{background-size:cover;position:relative;}
+html,body{height:100%;overflow:hidden;}
+ul li{list-style:none;}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder { 
+ /* WebKit browsers */ 
+color: #bbb; 
+} 
+input:-moz-placeholder, textarea:-moz-placeholder { 
+/* Mozilla Firefox 4 to 18 */ 
+color: #bbb; 
+} 
+input::-moz-placeholder, textarea::-moz-placeholder { 
+ /* Mozilla Firefox 19+ */ 
+color: #bbb; 
+} 
+input:-ms-input-placeholder, textarea:-ms-input-placeholder { 
+ /* Internet Explorer 10+ */ 
+color: #bbb; 
+}
+a{cursor:pointer;text-decoration:none;opacity:0.8;}
+a:hover{opacity:1;}
+img{vertical-align:middle;}
+
+
+/*自制下拉框 */
+.selectBox{ transition: all .1s; position:relative;cursor:pointer;line-height:25px;background:rgba(127,171,255,.1);border-radius:25px 8px;padding:0 40px 0 20px;display:inline-block;min-width:50px;height:25px;vertical-align:middle;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;color:#ccc;}
+.selectBox span{color:inherit;}
+.selectBox:after{content:'';color:white;background:url(images/triangle-down.png) no-repeat;position:absolute;right:10px;top:10px;width:10px;height:5px;}
+.selectBox:hover{box-shadow:0 0 5px 0px white inset;}
+
+
+.iframeBox{height:100%;width:100%;}
+.iframeBox iframe{height:100%;width:100%;border:none;}
+

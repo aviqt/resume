@@ -1,0 +1,56 @@
+
+body{background:none;overflow:auto;}
+
+.searchBox{overflow:hidden;padding:20px;}
+.searchBox button{
+  margin:5px 0;
+  margin-right:10px;
+  outline:none;
+  height:30px;
+  border:none;
+  padding:0 20px;
+  border-radius:3px;
+  background:#3266a0;
+  color:white;
+}
+.searchBox button:hover{background:#4377b1;}
+.searchBox select,
+.searchBox input[type='text']{
+  vertical-align:middle;
+  border:none;
+  background-color:rgba(0,0,0,0.2);
+  height:30px;
+  line-height:30px;
+  border-radius:3px;
+  width:200px;
+  margin:5px 0;
+  margin-right:15px;
+  color:white;
+  display:inline-block;
+  padding:0 12px;
+}
+
+
+
+
+
+.tableList{}
+.tableList .table{border:none;}
+.tableList .fixed-table-container{border:none;}
+.tableList .fixed-table-container tbody td , .tableList .fixed-table-container thead th {border-bottom:none;border-top:none;border-left-color:#bbb;border-left-color:rgba(255,255,255,0.3);line-height:22px;height:22px;}
+.tableList .bootstrap-table .table>thead>tr>th {border-bottom:none;font-weight:normal;}
+.tableList .fixed-table-container thead{background:rgba(255,255,255,0.3)}
+.tableList .fixed-table-container thead th{color:#333;}
+.tableList .fixed-table-container tbody tr{cursor:pointer;}
+.tableList .table-striped>tbody>tr:nth-of-type(odd){background:none}
+.tableList .table-striped>tbody>tr:nth-of-type(even){background:rgba(255,255,255,0.1)}
+.tableList .fixed-table-container tbody tr:hover{background:rgba(0,0,0,0.2)}
+.tableList .fixed-table-container tbody td{color:white;}
+.tableList .fixed-table-container tbody .selected td{background:rgba(0,0,0,.5)}
+.tableList .fixed-table-pagination{color:white;text-align:center;margin-top:15px;}
+.tableList .fixed-table-pagination div.pagination .pagination{margin-top:4px;}
+.tableList .fixed-table-pagination .pagination-detail, .tableList  .fixed-table-pagination div.pagination{margin:0 5px;float:none !important;display:inline-block;}
+.tableList .pull-right{vertical-align:middle;}
+.tableList .btn{padding:4px 12px;border:none;background:rgba(0,0,0,0.2);color:white;}
+.tableList .pagination>li>a, .tableList .pagination>li>span{border:none;background:rgba(0,0,0,0.3);color:white;}
+.tableList .pagination>.active>a,.tableList  .pagination>.active>a:focus,.tableList  .pagination>.active>a:hover,.tableList  .pagination>.active>span,.tableList  .pagination>.active>span:focus,.tableList  .pagination>.active>span:hover{border:none;background:rgba(255,255,255,0.2);color:white;}

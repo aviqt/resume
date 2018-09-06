@@ -1,0 +1,10 @@
+
+
+
+
+.treeBox{position:absolute;top:20px;bottom:20px;left:20px;width:280px;padding:20px;background:rgba(0,0,0,0.2);border-radius:5px;}
+.treeBox .ztree li a{color:white;}
+.treeBox .ztree li a.curSelectedNode{color:#333;}
+
+
+.listBox{position:absolute;top:0;bottom:0;left:320px;right:20px;}
